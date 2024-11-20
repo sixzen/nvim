@@ -267,13 +267,13 @@ return {
 
     vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle reveal=true position=float<CR>")
 
-    local normal_hl = vim.api.nvim_get_hl_by_name("TabLine", true)
+    -- local normal_hl = vim.api.nvim_get_hl_by_name("TabLine", true)
     -- local visual_hl = vim.api.nvim_get_hl_by_name("Visual", true)
     -- local string_hl = vim.api.nvim_get_hl_by_name("String", true)
-    local error_hl = vim.api.nvim_get_hl_by_name("Error", true)
+    -- local error_hl = vim.api.nvim_get_hl_by_name("Error", true)
     -- local statusline_hl = vim.api.nvim_get_hl_by_name("Statusline", true)
 
-    vim.api.nvim_set_hl(0, "NeoTreeFloatBorder", { fg = normal_hl.background, bg = normal_hl.background })
-    vim.api.nvim_set_hl(0, "NeoTreeFloatTitle", { fg = normal_hl.background, bg = error_hl.foreground })
+    -- vim.api.nvim_set_hl(0, "NeoTreeFloatBorder", { fg = normal_hl.background, bg = normal_hl.background })
+    -- vim.api.nvim_set_hl(0, "NeoTreeFloatTitle", { fg = normal_hl.background, bg = error_hl.foreground })
   end,
 }

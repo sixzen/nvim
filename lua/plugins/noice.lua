@@ -60,6 +60,12 @@ return {
           -- border = "rounded",
           -- position = { row = 2, col = 2 },
           silent = true,
+          win_options = {
+            winhighlight = {
+              Normal = "FloatHover",
+              FloatBorder = "FloatBorderHover",
+            },
+          },
         },
         mini = {
           timeout = 3000,
