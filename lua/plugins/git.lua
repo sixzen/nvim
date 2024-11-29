@@ -1,6 +1,7 @@
 return {
   {
     "kdheepak/lazygit.nvim",
+    enabled = false,
     lazy = true,
     cmd = {
       "LazyGit",
@@ -23,7 +24,7 @@ return {
     "sindrets/diffview.nvim",
     event = "VeryLazy",
     keys = {
-      { "<leader><leader>do", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
+      { "<leader><leader>do", "<cmd>DiffviewOpen<cr>",  desc = "Open Diffview" },
       { "<leader><leader>dc", "<cmd>DiffviewClose<cr>", desc = "Open Diffview" },
     },
   },

@@ -3,16 +3,16 @@ return {
   event = "UIEnter",
   dependencies = {
     "MunifTanjim/nui.nvim",
-    {
-      "rcarriga/nvim-notify",
-      config = function()
-        local notify = require "notify"
-        notify.setup {
-          stages = "fade_in_slide_out",
-          render = "compact",
-        }
-      end,
-    },
+    -- {
+    --   "rcarriga/nvim-notify",
+    --   config = function()
+    --     local notify = require "notify"
+    --     notify.setup {
+    --       stages = "fade_in_slide_out",
+    --       render = "compact",
+    --     }
+    --   end,
+    -- },
   },
   config = function()
     require("noice").setup {
