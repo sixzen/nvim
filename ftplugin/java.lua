@@ -85,20 +85,36 @@ local config = {
           -- },
           {
             name = "JavaSE-19",
-            path = "~/.sdkman/candidates/java/19-open",
+            path = "~/.local/share/mise/installs/java/19.0.2",
           },
           {
             name = "JavaSE-20",
-            path = "~/.sdkman/candidates/java/20-open",
+            path = "~/.local/share/mise/installs/java/20.0.2",
           },
           {
             name = "JavaSE-21",
-            path = "~/.sdkman/candidates/java/21.0.2-open",
+            path = "~/.local/share/mise/installs/java/21.0.2",
           },
           {
             name = "JavaSE-22",
-            path = "~/.sdkman/candidates/java/22-open",
+            path = "~/.local/share/mise/installs/java/22.0.2",
           },
+          -- {
+          --   name = "JavaSE-19",
+          --   path = "~/.sdkman/candidates/java/19-open",
+          -- },
+          -- {
+          --   name = "JavaSE-20",
+          --   path = "~/.sdkman/candidates/java/20-open",
+          -- },
+          -- {
+          --   name = "JavaSE-21",
+          --   path = "~/.sdkman/candidates/java/21.0.2-open",
+          -- },
+          -- {
+          --   name = "JavaSE-22",
+          --   path = "~/.sdkman/candidates/java/22-open",
+          -- },
         },
       },
       maven = {
