@@ -31,9 +31,31 @@ return {
       notification = {
         wo = { wrap = true }, -- Wrap notifications
       },
+      -- input = {
+      --   relative = "cursor",
+      --   row = -3,
+      --   col = 0,
+      -- },
     },
+    input = { enabled = true },
+    indent = { enabled = true, indent = { char = "▎" }, scope = { char = "▎" } },
+    scroll = { enabled = false },
   },
   keys = {
+    {
+      "<leader>z",
+      function()
+        Snacks.zen()
+      end,
+      desc = "Toggle Zen Mode",
+    },
+    {
+      "<leader>Z",
+      function()
+        Snacks.zen.zoom()
+      end,
+      desc = "Toggle Zoom",
+    },
     {
       "<leader>.",
       function()
@@ -159,6 +181,14 @@ return {
             :map "<leader>uc"
         Snacks.toggle.treesitter():map "<leader>uT"
         Snacks.toggle.inlay_hints():map "<leader>uh"
+        Snacks.toggle.indent():map "<leader>ug"
+        Snacks.toggle.dim():map "<leader>uD"
+      end,
+    })
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MiniFilesActionRename",
+      callback = function(event)
+        Snacks.rename.on_rename_file(event.data.from, event.data.to)
       end,
     })
   end,

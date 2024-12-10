@@ -10,10 +10,10 @@ return {
     --   "folke/neodev.nvim",
     --   opts = {}
     -- },
-    {
-      "antosha417/nvim-lsp-file-operations",
-      config = true,
-    },
+    -- {
+    --   "antosha417/nvim-lsp-file-operations",
+    --   config = true,
+    -- },
     -- {
     --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     --   config = function()
