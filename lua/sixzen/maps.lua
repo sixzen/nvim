@@ -45,5 +45,3 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 
 vim.keymap.set("t", "<C-q>", "<C-\\><C-n>", { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>x", ":lua require'sixzen.utils'.buf_kill('bd', 0, false) <CR>", { silent = true })

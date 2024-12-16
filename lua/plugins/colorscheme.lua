@@ -142,6 +142,7 @@ return {
           window_picker = true,
           -- alpha = true,
           noice = true,
+          snacks = true,
           -- lsp_saga = true,
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },

@@ -12,7 +12,6 @@ vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.showmode = false
 vim.opt.showtabline = 2
 vim.opt.hidden = true
--- vim.opt.foldlevelstart = 99
 vim.opt.pumheight = 10
 vim.opt.breakindent = true
 vim.opt.splitbelow = true
@@ -32,7 +31,6 @@ vim.opt.cmdheight = 1
 vim.opt.expandtab = true
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 20
-vim.opt.shell = "zsh"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
@@ -92,30 +90,11 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
--- local aug = vim.api.nvim_create_augroup("buf_large", { clear = true })
-
--- vim.api.nvim_create_autocmd({ "BufReadPre" }, {
---   callback = function()
---     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()))
---     if ok and stats and (stats.size > 1000000) then
---       vim.b.large_buf = true
---       vim.cmd "syntax off"
---       vim.cmd "IlluminatePauseBuf" -- disable vim-illuminate
---       vim.cmd "IBLDisable"         -- disable indent-blankline.nvim
---       vim.cmd "TSContextDisable"
---       vim.opt_local.foldmethod = "manual"
---       vim.opt_local.spell = false
---     else
---       vim.b.large_buf = false
---     end
---   end,
---   group = aug,
---   pattern = "*",
--- })
-
 vim.api.nvim_create_autocmd({ "TermOpen" }, {
   pattern = { "*" },
   callback = function(_)
     vim.cmd.setlocal "nonumber"
   end,
 })
+
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
