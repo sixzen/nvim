@@ -9,6 +9,8 @@ vim.opt.relativenumber = true
 
 vim.opt.completeopt = { "menuone", "noselect" }
 
+-- vim.opt.shell = "nu"
+-- vim.opt.shellredir = "| save"
 vim.opt.showmode = false
 vim.opt.showtabline = 2
 vim.opt.hidden = true
@@ -35,7 +37,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
 vim.opt.shiftwidth = 2
-vim.opt.mouse = ""
+vim.opt.mouse = "a"
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.laststatus = 3 -- always show status line
