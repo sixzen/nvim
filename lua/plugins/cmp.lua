@@ -8,40 +8,37 @@ return {
     "hrsh7th/cmp-nvim-lua",     -- nvim-cmp for lua
     "hrsh7th/cmp-git",          -- nvim-cmp for git
     "hrsh7th/cmp-cmdline",      -- nvim-cmp for cmdline
-    -- "hrsh7th/cmp-nvim-lsp-signature-help", -- nvim-cmp for cmdline
     "L3MON4D3/LuaSnip",         -- Snippets
-    -- "zbirenbaum/copilot-cmp",              -- Copilot
-    -- "windwp/nvim-autopairs",
-    "roobert/tailwindcss-colorizer-cmp.nvim",
+    {
+      "js-everts/cmp-tailwind-colors",
+      opts = {
+        enable_alpha = true,
+        format = function(itemColor)
+          return {
+            fg = itemColor,
+            bg = nil, -- or nil if you dont want a background color
+            text = " ", -- or use an icon
+          }
+        end,
+      },
+    },
   },
   event = { "InsertEnter", "CmdlineEnter" },
   config = function()
     local cmp = require "cmp"
-    -- local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-    -- local cmp_window = require "cmp.config.window"
     local cmp_mapping = require "cmp.config.mapping"
     local icons = require "sixzen.icons"
-
-    -- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
     local cmp_types = require "cmp.types.cmp"
     local ConfirmBehavior = cmp_types.ConfirmBehavior
     local SelectBehavior = cmp_types.SelectBehavior
     local luasnip = require "luasnip"
+
     cmp.setup {
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-          luasnip.filetype_extend("javascript", { "javascriptreact" })
-        end,
-      },
       experimental = {
         native_menu = false,
         ghost_text = false,
       },
       window = {
-        -- completion = cmp_window.bordered(),
-        -- documentation = cmp_window.bordered(),
         completion = {
           winhighlight = "Normal:CmpNormal",
         },
@@ -111,16 +108,10 @@ return {
         ["<C-e>"] = cmp_mapping.abort(),
       },
       sources = cmp.config.sources {
-        -- {
-        --   name = "copilot",
-        --   keyword_length = 0,
-        --   max_item_count = 3,
-        -- },
         { name = "otter" },
         { name = "luasnip" },
         { name = "nvim_lua" },
         { name = "nvim_lsp" },
-        -- { name = "nvim_lsp_signature_help" },
         {
           name = "buffer",
           keyword_length = 4,
@@ -167,7 +158,10 @@ return {
             vim_item.abbr = string.sub(vim_item.abbr, 1, max_width - 1) .. icons.ui.Ellipsis
           end
 
-          vim_item.kind = icons.kind[vim_item.kind]
+          vim_item = require("cmp-tailwind-colors").format(entry, vim_item)
+          if icons.kind[vim_item.kind] then
+            vim_item.kind = icons.kind[vim_item.kind]
+          end
 
           if entry.source.name == "copilot" then
             vim_item.kind = icons.git.Octoface
@@ -215,76 +209,6 @@ return {
           }
           vim_item.menu = source_names[entry.source.name]
           vim_item.dup = duplicates[entry.source.name] or 0
-          if vim.tbl_contains({ "nvim_lsp" }, entry.source.name) then
-            local words = {}
-            for word in string.gmatch(vim_item.word, "[^-]+") do
-              table.insert(words, word)
-            end
-
-            local color_name, color_number
-            if
-                words[2] == "x"
-                or words[2] == "y"
-                or words[2] == "t"
-                or words[2] == "b"
-                or words[2] == "l"
-                or words[2] == "r"
-            then
-              color_name = words[3]
-              color_number = words[4]
-            else
-              color_name = words[2]
-              color_number = words[3]
-            end
-
-            if color_name == "white" or color_name == "black" then
-              local color
-              if color_name == "white" then
-                color = "ffffff"
-              else
-                color = "000000"
-              end
-
-              local hl_group = "lsp_documentColor_mf_" .. color
-              vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "#" .. color })
-              vim_item.kind_hl_group = hl_group
-
-              -- make the color square 2 chars wide
-              vim_item.kind = string.rep("X", 2)
-
-              return vim_item
-            elseif #words < 3 or #words > 4 then
-              -- doesn't look like this is a tailwind css color
-              return vim_item
-            end
-
-            if not color_name or not color_number then
-              return vim_item
-            end
-
-            local color_index = tonumber(color_number)
-            local tailwindcss_colors = require("tailwindcss-colorizer-cmp.colors").TailwindcssColors
-
-            if not tailwindcss_colors[color_name] then
-              return vim_item
-            end
-
-            if not tailwindcss_colors[color_name][color_index] then
-              return vim_item
-            end
-
-            local color = tailwindcss_colors[color_name][color_index]
-
-            local hl_group = "lsp_documentColor_mf_" .. color
-            vim.api.nvim_set_hl(0, hl_group, { fg = "#" .. color, bg = "#" .. color })
-
-            vim_item.kind_hl_group = hl_group
-
-            -- make the color square 2 chars wide
-            vim_item.kind = string.rep("X", 2)
-
-            return vim_item
-          end
           return vim_item
         end,
       },
@@ -294,14 +218,6 @@ return {
     cmp.setup.filetype("gitcommit", {
       sources = cmp.config.sources({
         { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
-      }, {
-        { name = "buffer" },
-      }),
-    })
-
-    cmp.setup.filetype("norg", {
-      sources = cmp.config.sources({
-        { name = "neorg" },
       }, {
         { name = "buffer" },
       }),
