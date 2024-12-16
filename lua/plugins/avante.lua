@@ -1,6 +1,7 @@
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
+  enabled = false,
   build = "make",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",

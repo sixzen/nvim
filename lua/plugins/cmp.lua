@@ -8,6 +8,7 @@ return {
     "hrsh7th/cmp-nvim-lua",     -- nvim-cmp for lua
     "hrsh7th/cmp-git",          -- nvim-cmp for git
     "hrsh7th/cmp-cmdline",      -- nvim-cmp for cmdline
+    "hrsh7th/cmp-emoji",        -- nvim-cmp source for emojis
     "L3MON4D3/LuaSnip",         -- Snippets
     {
       "js-everts/cmp-tailwind-colors",
@@ -112,6 +113,7 @@ return {
         { name = "luasnip" },
         { name = "nvim_lua" },
         { name = "nvim_lsp" },
+        { name = "emoji" },
         {
           name = "buffer",
           keyword_length = 4,
@@ -158,9 +160,10 @@ return {
             vim_item.abbr = string.sub(vim_item.abbr, 1, max_width - 1) .. icons.ui.Ellipsis
           end
 
+          vim_item.menu = vim_item.kind
           vim_item = require("cmp-tailwind-colors").format(entry, vim_item)
           if icons.kind[vim_item.kind] then
-            vim_item.kind = icons.kind[vim_item.kind]
+            vim_item.kind = icons.kind[vim_item.kind] .. " "
           end
 
           if entry.source.name == "copilot" then

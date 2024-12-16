@@ -31,11 +31,11 @@ return {
       notification = {
         wo = { wrap = true }, -- Wrap notifications
       },
-      -- input = {
-      --   relative = "cursor",
-      --   row = -3,
-      --   col = 0,
-      -- },
+      input = {
+        relative = "cursor",
+        row = -3,
+        col = 0,
+      },
     },
     input = { enabled = true },
     indent = { enabled = true, indent = { char = "▎" }, scope = { char = "▎" } },
