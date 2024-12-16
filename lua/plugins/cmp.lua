@@ -12,7 +12,7 @@ return {
     {
       "js-everts/cmp-tailwind-colors",
       opts = {
-        enable_alpha = true,
+        enable_alpha = false,
         format = function(itemColor)
           return {
             fg = itemColor,
