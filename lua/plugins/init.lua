@@ -21,7 +21,7 @@ return {
       end
     end,
   },
-  { "mbbill/undotree",      keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>" } } },
+  { "mbbill/undotree",      keys = { { "<leader>U", "<cmd>UndotreeToggle<CR>" } } },
   {
     "tpope/vim-dispatch",
     cmd = { "Make", "Dispatch" },

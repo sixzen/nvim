@@ -1,6 +1,7 @@
 return {
   "RRethy/vim-illuminate", -- Highlight all occurrences of the word under the cursor
   event = { "BufReadPre", "BufNewFile" },
+  enabled = false,
   config = function()
     local illuminate = require "illuminate"
 
