@@ -161,7 +161,7 @@ require("telescope").setup {
 -- local string_hl = vim.api.nvim_get_hl_by_name("String", true)
 -- local error_hl = vim.api.nvim_get_hl_by_name("Error", true)
 -- local statusline_hl = vim.api.nvim_get_hl_by_name("Statusline", true)
-
+--
 -- vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = visual_hl.background, bg = normal_hl.background })
 -- vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = normal_hl.background })
 -- vim.api.nvim_set_hl(0, "TelescopePreviewBorder", { fg = normal_hl.background, bg = normal_hl.background })
