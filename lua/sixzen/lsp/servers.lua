@@ -135,7 +135,15 @@ local servers = {
     }
   end,
   ["emmet_ls"] = function()
-    local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    local has_cmp = pcall(require, "cmp_nvim_lsp")
+    local has_blink = pcall(require, "blink.cmp")
+    local cmp_capabilities
+
+    if has_cmp then
+      cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    elseif has_blink then
+      cmp_capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+    end
     return {
       on_attach = on_attach,
       capabilities = cmp_capabilities,

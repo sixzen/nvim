@@ -1,5 +1,6 @@
 return {
   "L3MON4D3/LuaSnip", -- Snippets
+  enabled = false,
   event = "InsertEnter",
   dependencies = {
     {
