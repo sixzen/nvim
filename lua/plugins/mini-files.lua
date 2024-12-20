@@ -32,13 +32,13 @@ return {
     -- Use `''` (empty string) to not create one.
     mappings = {
       close = "q",
-      go_in = "l",
-      go_in_plus = "L",
-      go_out = "h",
+      go_in = "L",
+      go_in_plus = "<CR>",
+      go_out = "<BS>",
       go_out_plus = "H",
       mark_goto = "'",
       mark_set = "m",
-      reset = "<BS>",
+      reset = "R",
       reveal_cwd = "@",
       show_help = "g?",
       synchronize = "=",
@@ -59,13 +59,13 @@ return {
       -- Maximum number of windows to show side by side
       max_number = math.huge,
       -- Whether to show preview of file/directory under cursor
-      preview = false,
+      preview = true,
       -- Width of focused window
       width_focus = 50,
       -- Width of non-focused window
       width_nofocus = 15,
       -- Width of preview window
-      width_preview = 25,
+      width_preview = 35,
     },
   },
 }

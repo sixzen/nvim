@@ -99,6 +99,8 @@ return {
 
             PackageInfoOutdatedVersion = { fg = colors.peach },
             CmpNormal = { bg = colors.mantle },
+            BlinkCmpMenu = { bg = colors.mantle },
+            BlinkCmpMenuSelection = { bg = colors.surface0 },
             LspInlayHint = { fg = colors.surface1, bg = colors.none },
             InclineNormal = { bg = colors.mantle },
             InclineNormalNC = { bg = colors.mantle },
@@ -146,6 +148,7 @@ return {
           -- alpha = true,
           noice = true,
           snacks = true,
+          blink_cmp = false,
           -- lsp_saga = true,
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
