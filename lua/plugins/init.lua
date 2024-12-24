@@ -21,16 +21,24 @@ return {
       end
     end,
   },
-  { "mbbill/undotree",      keys = { { "<leader>U", "<cmd>UndotreeToggle<CR>" } } },
+  { "mbbill/undotree",   keys = { { "<leader>U", "<cmd>UndotreeToggle<CR>" } } },
   {
     "tpope/vim-dispatch",
     cmd = { "Make", "Dispatch" },
   },
-  { "tpope/vim-repeat",     event = "BufRead" },
-  { "tpope/vim-rhubarb",    event = "BufRead" },
-  { "tpope/vim-dotenv",     event = "BufRead" },
-  { "tpope/vim-eunuch",     event = "BufRead" },
-  { "kevinhwang91/nvim-bqf" },
+  { "tpope/vim-repeat",  event = "BufRead" },
+  { "tpope/vim-rhubarb", event = "BufRead" },
+  { "tpope/vim-dotenv",  event = "BufRead" },
+  { "tpope/vim-eunuch",  event = "BufRead" },
+  {
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
+    opts = {
+      preview = {
+        winblend = 0,
+      },
+    },
+  },
   {
     "axelvc/template-string.nvim",
     ft = { "typescript", "javascript", "typescriptreact", "javascriptreact", "python" },
