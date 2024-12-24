@@ -1,7 +1,6 @@
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
-  enabled = false,
   build = "make",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
@@ -9,14 +8,17 @@ return {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     "echasnovski/mini.icons", -- or echasnovski/mini.icons
-    "zbirenbaum/copilot.lua",      -- for providers='copilot'
+    "zbirenbaum/copilot.lua", -- for providers='copilot'
   },
-  version = false, -- set this if you want to always pull the latest change
+  version = false,            -- set this if you want to always pull the latest change
   opts = {
     -- add any opts here
     ---@alias Provider1 "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
     provider = "copilot",
     auto_suggestions_provider = "copilot",
+    copilot = {
+      model = "claude-3.5-sonnet", -- o1-preview | o1-mini | claude-3.5-sonnet
+    },
     behaviour = {
       auto_suggestions = false, -- Experimental stage
       auto_set_highlight_group = true,

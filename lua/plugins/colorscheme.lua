@@ -125,6 +125,8 @@ return {
             FloatHover = { bg = colors.mantle },
             FloatBorderHover = { fg = colors.mantle, bg = colors.mantle },
 
+            BqfPreviewFloat = { bg = colors.mantle },
+
             SnacksIndent = { fg = "#3c3d49" },
             SnacksIndentScope = { fg = "#5e5f69" },
           }
