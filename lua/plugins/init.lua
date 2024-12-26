@@ -61,5 +61,5 @@ return {
       vim.keymap.set("n", "<leader>ta", "<cmd>ToggleAlternate<cr>")
     end,
   },
-  { "SmiteshP/nvim-navic",      lazy = true }, -- Breadcrumb
+  -- { "SmiteshP/nvim-navic",      lazy = true }, -- Breadcrumb
 }

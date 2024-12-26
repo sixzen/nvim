@@ -3,7 +3,7 @@ return {
   -- event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   dependencies = {
-    "numToStr/Comment.nvim",
+    -- "numToStr/Comment.nvim",
     "nvim-treesitter/nvim-treesitter-textobjects",
     -- {
     --   "windwp/nvim-autopairs",
