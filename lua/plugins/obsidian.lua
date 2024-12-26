@@ -15,7 +15,7 @@ return {
     workspaces = {
       {
         name = "Notes",
-        path = "/mnt/c/Users/azapata/notes/",
+        path = os.getenv("OBSIDIAN_VAULT"),
       },
     },
     completion = {
