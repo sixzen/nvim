@@ -1,7 +1,7 @@
 return {
   "rcarriga/nvim-notify",
   event = "UIEnter",
-  enabled = true,
+  enabled = false,
   config = function()
     local notify = require "notify"
     notify.setup {

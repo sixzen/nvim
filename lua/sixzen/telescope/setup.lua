@@ -47,6 +47,9 @@ require("telescope").setup {
     sorting_strategy = "descending",
     scroll_strategy = "cycle",
     color_devicons = true,
+    file_ignore_patterns = {
+      "node_modules",
+    },
     mappings = {
       n = {
         ["q"] = actions.close,
@@ -175,7 +178,7 @@ require("telescope").setup {
 -- vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { bg = normal_hl.background })
 -- vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = normal_hl.background, bg = normal_hl.background })
 
-require("telescope").load_extension "notify"
+-- require("telescope").load_extension "notify"
 -- require("telescope").load_extension "file_browser"
 require("telescope").load_extension "fzf"
 require("telescope").load_extension "ui-select"
