@@ -1,3 +1,4 @@
+local trigger_text = ";"
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -258,8 +259,9 @@ return {
     end,
   },
   {
+    -- inspired by https://github.com/linkarzu/dotfiles-latest/blob/main/neovim/neobean/lua/plugins/blink-cmp.lua
     "saghen/blink.cmp",
-    dependencies = "rafamadriz/friendly-snippets",
+    dependencies = { "L3MON4D3/LuaSnip", "moyiz/blink-emoji.nvim" },
     enabled = true,
     event = { "InsertEnter", "CmdlineEnter" },
     version = "v0.*",
@@ -290,7 +292,7 @@ return {
       },
 
       sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer", "dadbod", "markdown" },
+        default = { "lazydev", "lsp", "path", "buffer", "dadbod", "markdown", "snippets", "emoji" },
         providers = {
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
           markdown = { name = "RenderMarkdown", module = "render-markdown.integ.blink" },
@@ -299,7 +301,109 @@ return {
             module = "lazydev.integrations.blink",
             score_offset = 100,
           },
+          lsp = {
+            name = "lsp",
+            enabled = true,
+            module = "blink.cmp.sources.lsp",
+            -- kind = "LSP",
+            score_offset = 90, -- the higher the number, the higher the priority
+          },
+          snippets = {
+            name = "snippets",
+            enabled = true,
+            module = "blink.cmp.sources.snippets",
+            min_keyword_length = 2,
+            -- fallbacks = { "snippets" },
+            score_offset = 95,
+            max_items = 8,
+            should_show_items = function()
+              local col = vim.api.nvim_win_get_cursor(0)[2]
+              local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
+              return before_cursor:match(trigger_text .. "%w*$") ~= nil
+            end,
+            transform_items = function(ctx, items)
+              local _ = ctx
+              local col = vim.api.nvim_win_get_cursor(0)[2]
+              local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
+              local trigger_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
+              if trigger_pos then
+                for _, item in ipairs(items) do
+                  item.textEdit = {
+                    newText = item.insertText or item.label,
+                    range = {
+                      start = { line = vim.fn.line "." - 1, character = trigger_pos - 1 },
+                      ["end"] = { line = vim.fn.line "." - 1, character = col },
+                    },
+                  }
+                end
+              end
+              vim.schedule(function()
+                require("blink.cmp").reload "snippets"
+              end)
+              return items
+            end,
+          },
+          emoji = {
+            module = "blink-emoji",
+            name = "Emoji",
+            score_offset = 15,        -- Tune by preference
+            opts = { insert = true }, -- Insert emoji (default) or complete its name
+          },
+          path = {
+            name = "Path",
+            module = "blink.cmp.sources.path",
+            score_offset = 3,
+            fallbacks = { "snippets", "buffer" },
+            opts = {
+              trailing_slash = false,
+              label_trailing_slash = true,
+              get_cwd = function(context)
+                return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
+              end,
+              show_hidden_files_by_default = true,
+            },
+          },
+          buffer = {
+            name = "Buffer",
+            enabled = true,
+            max_items = 3,
+            module = "blink.cmp.sources.buffer",
+            min_keyword_length = 3,
+          },
+          -- snippets = {
+          --   name = "snippets",
+          --   enabled = true,
+          --   max_items = 3,
+          --   module = "blink.cmp.sources.snippets",
+          --   min_keyword_length = 4,
+          --   score_offset = 80, -- the higher the number, the higher the priority
+          -- },
         },
+        cmdline = function()
+          local type = vim.fn.getcmdtype()
+          if type == "/" or type == "?" then
+            return { "buffer" }
+          end
+          if type == ":" then
+            return { "cmdline" }
+          end
+          return {}
+        end,
+      },
+      snippets = {
+        preset = "luasnip",
+        expand = function(snippet)
+          require("luasnip").lsp_expand(snippet)
+        end,
+        active = function(filter)
+          if filter and filter.direction then
+            return require("luasnip").jumpable(filter.direction)
+          end
+          return require("luasnip").in_snippet()
+        end,
+        jump = function(direction)
+          require("luasnip").jump(direction)
+        end,
       },
 
       signature = { enabled = true },

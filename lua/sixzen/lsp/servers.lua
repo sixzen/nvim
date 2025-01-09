@@ -134,30 +134,30 @@ local servers = {
       capabilities = capabilities,
     }
   end,
-  ["emmet_ls"] = function()
-    local has_cmp = pcall(require, "cmp_nvim_lsp")
-    local has_blink = pcall(require, "blink.cmp")
-    local cmp_capabilities
-
-    if has_cmp then
-      cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-    elseif has_blink then
-      cmp_capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
-    end
-    return {
-      on_attach = on_attach,
-      capabilities = cmp_capabilities,
-      filetypes = {
-        "html",
-        "typescriptreact",
-        "javascriptreact",
-        "css",
-        "sass",
-        "scss",
-        "less",
-      },
-    }
-  end,
+  -- ["emmet_ls"] = function()
+  --   local has_cmp = pcall(require, "cmp_nvim_lsp")
+  --   local has_blink = pcall(require, "blink.cmp")
+  --   local cmp_capabilities
+  --
+  --   if has_cmp then
+  --     cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  --   elseif has_blink then
+  --     cmp_capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+  --   end
+  --   return {
+  --     on_attach = on_attach,
+  --     capabilities = cmp_capabilities,
+  --     filetypes = {
+  --       "html",
+  --       "typescriptreact",
+  --       "javascriptreact",
+  --       "css",
+  --       "sass",
+  --       "scss",
+  --       "less",
+  --     },
+  --   }
+  -- end,
   ["gopls"] = function()
     return {
       on_attach = on_attach,
