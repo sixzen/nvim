@@ -15,7 +15,7 @@ return {
     -- add any opts here
     ---@alias Provider1 "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
     provider = "copilot",
-    auto_suggestions_provider = "copilot",
+    -- auto_suggestions_provider = "copilot",
     copilot = {
       model = "claude-3.5-sonnet", -- o1-preview | o1-mini | claude-3.5-sonnet
     },
