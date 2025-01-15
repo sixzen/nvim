@@ -15,7 +15,7 @@ local builtin = require "telescope.builtin"
 local pickers = require "telescope.pickers"
 local finders = require "telescope.finders"
 local make_entry = require "telescope.make_entry"
-local conf = require "telescope.config".values
+local conf = require("telescope.config").values
 
 local M = {}
 
@@ -24,8 +24,8 @@ local M = {}
 -- end
 
 function M.project_files()
-  local opts = { show_untracked = true } -- define here if you want to define something
-  local ok = pcall(builtin.git_files, opts)
+  local opts = { workspace = "CWD", prompt_title = "Files" } -- define here if you want to define something
+  local ok = pcall(require("telescope").extensions.frecency.frecency, opts)
   if not ok then
     builtin.find_files { hidden = true }
   end
@@ -53,10 +53,13 @@ function M.live_multigrep(opts)
         table.insert(args, pieces[2])
       end
 
-      return vim.iter({
-        args,
-        { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
-      }):flatten():totable()
+      return vim
+          .iter({
+            args,
+            { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
+          })
+          :flatten()
+          :totable()
     end,
     entry_maker = make_entry.gen_from_vimgrep(opts),
     cwd = opts.cwd,
