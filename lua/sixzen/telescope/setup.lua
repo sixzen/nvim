@@ -17,12 +17,12 @@ require("telescope").setup {
     prompt_prefix = "❯ ",
     selection_caret = "❯ ",
     winblend = 0,
-    layout_strategy = "horizontal",
+    path_display = { "smart" },
+    layout_strategy = "bottom_pane",
     layout_config = {
-      width = 0.95,
-      height = 0.85,
+      height = 25,
       -- preview_cutoff = 120,
-      prompt_position = "bottom",
+      prompt_position = "top",
       horizontal = {
         preview_width = function(_, cols, _)
           if cols > 200 then
@@ -44,7 +44,7 @@ require("telescope").setup {
       },
     },
     selection_strategy = "reset",
-    sorting_strategy = "descending",
+    sorting_strategy = "ascending",
     scroll_strategy = "cycle",
     color_devicons = true,
     file_ignore_patterns = {
@@ -134,6 +134,24 @@ require("telescope").setup {
         previewer = false,
       },
     },
+    frecency = {
+      show_scores = true, -- Default: false
+      -- If `true`, it shows confirmation dialog before any entries are removed from the DB
+      -- If you want not to be bothered with such things and to remove stale results silently
+      -- set db_safe_mode=false and auto_validate=true
+      --
+      -- This fixes an issue I had in which I couldn't close the floating
+      -- window because I couldn't focus it
+      db_safe_mode = false,       -- Default: true
+      -- If `true`, it removes stale entries count over than db_validate_threshold
+      auto_validate = true,       -- Default: true
+      -- It will remove entries when stale ones exist more than this count
+      db_validate_threshold = 10, -- Default: 10
+      -- Show the path of the active filter before file paths.
+      -- So if I'm in the `dotfiles-latest` directory it will show me that
+      -- before the name of the file
+      show_filter_column = false, -- Default: true
+    },
     -- file_browser = {
     --   theme = "dropdown",
     --   -- disables netrw add use telescope-file-browser in its place
@@ -182,4 +200,5 @@ require("telescope").setup {
 -- require("telescope").load_extension "file_browser"
 require("telescope").load_extension "fzf"
 require("telescope").load_extension "ui-select"
+require("telescope").load_extension "frecency"
 -- require("telescope").load_extension "noice"
