@@ -379,16 +379,19 @@ return {
           --   score_offset = 80, -- the higher the number, the higher the priority
           -- },
         },
-        cmdline = function()
-          local type = vim.fn.getcmdtype()
-          if type == "/" or type == "?" then
-            return { "buffer" }
-          end
-          if type == ":" then
-            return { "cmdline" }
-          end
-          return {}
-        end,
+        -- cmdline = function()
+        --   local type = vim.fn.getcmdtype()
+        --   if type == "/" or type == "?" then
+        --     return { "buffer" }
+        --   end
+        --   if type == ":" then
+        --     return { "cmdline" }
+        --   end
+        --   return {}
+        -- end,
+        cmdline = {
+          enabled = false,
+        },
       },
       snippets = {
         preset = "luasnip",

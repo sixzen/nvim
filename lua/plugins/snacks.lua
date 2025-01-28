@@ -24,6 +24,27 @@ return {
       enabled = true,
       timeout = 3000,
     },
+    picker = {
+      enabled = true,
+      layout = {
+        layout = {
+          box = "vertical",
+          backdrop = false,
+          row = -1,
+          width = 0,
+          height = 0.7,
+          border = "top",
+          title = " {title} {live} {flags}",
+          title_pos = "left",
+          { win = "input", height = 1, border = "bottom" },
+          {
+            box = "horizontal",
+            { win = "list",    border = "none" },
+            { win = "preview", title = "{preview}", width = 0.6, border = "left" },
+          },
+        },
+      },
+    },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
@@ -134,11 +155,12 @@ return {
       desc = "Dismiss All Notifications",
     },
     {
-      "<c-/>",
+      "<c-\\>",
       function()
         Snacks.terminal()
       end,
       desc = "Toggle Terminal",
+      mode = { "n", "t" },
     },
     {
       "]]",
@@ -155,6 +177,55 @@ return {
       end,
       desc = "Prev Reference",
       mode = { "n", "t" },
+    },
+    {
+      "<leader>;b",
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = "Buffers",
+    },
+    {
+      "<leader>;l",
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = "Grep",
+    },
+    {
+      "<leader>;:",
+      function()
+        Snacks.picker.command_history()
+      end,
+      desc = "Command History",
+    },
+    {
+      "<leader>;f",
+      function()
+        Snacks.picker.smart()
+      end,
+      desc = "Smart picker",
+    },
+    {
+      "<leader>;a",
+      function()
+        Snacks.picker.files()
+      end,
+      desc = "Find Files",
+    },
+    {
+      "<leader>;;",
+      function()
+        Snacks.picker.resume()
+      end,
+      desc = "Resume",
+    },
+    {
+      "<leader>;h",
+      function()
+        Snacks.picker.help()
+      end,
+      desc = "Help Tags",
     },
   },
   init = function()
