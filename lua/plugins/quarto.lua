@@ -103,6 +103,7 @@ return {
     -- needs:
     -- pip install jupytext
     "GCBallesteros/jupytext.nvim",
+    ft = { "quarto" },
     opts = {
       custom_language_formatting = {
         python = {

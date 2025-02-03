@@ -370,14 +370,6 @@ return {
             module = "blink.cmp.sources.buffer",
             min_keyword_length = 3,
           },
-          -- snippets = {
-          --   name = "snippets",
-          --   enabled = true,
-          --   max_items = 3,
-          --   module = "blink.cmp.sources.snippets",
-          --   min_keyword_length = 4,
-          --   score_offset = 80, -- the higher the number, the higher the priority
-          -- },
         },
         -- cmdline = function()
         --   local type = vim.fn.getcmdtype()
@@ -409,7 +401,7 @@ return {
         end,
       },
 
-      signature = { enabled = true },
+      -- signature = { enabled = true },
     },
     opts_extend = { "sources.default" },
   },
