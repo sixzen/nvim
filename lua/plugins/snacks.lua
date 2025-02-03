@@ -27,20 +27,27 @@ return {
     picker = {
       enabled = true,
       layout = {
-        layout = {
-          box = "vertical",
-          backdrop = false,
-          row = -1,
-          width = 0,
-          height = 0.7,
-          border = "top",
-          title = " {title} {live} {flags}",
-          title_pos = "left",
-          { win = "input", height = 1, border = "bottom" },
-          {
-            box = "horizontal",
-            { win = "list",    border = "none" },
-            { win = "preview", title = "{preview}", width = 0.6, border = "left" },
+        preset = function()
+          return vim.o.columns >= 120 and "ivy" or "vertical"
+        end,
+      },
+      layouts = {
+        ivy = {
+          layout = {
+            box = "vertical",
+            backdrop = false,
+            row = -1,
+            width = 0,
+            height = 0.7,
+            border = "top",
+            title = " {title} {live} {flags}",
+            title_pos = "left",
+            { win = "input", height = 1, border = "bottom" },
+            {
+              box = "horizontal",
+              { win = "list",    border = "none" },
+              { win = "preview", title = "{preview}", width = 0.6, border = "left" },
+            },
           },
         },
       },
@@ -193,6 +200,14 @@ return {
       desc = "Grep",
     },
     {
+      "<leader>;w",
+      function()
+        Snacks.picker.grep_word()
+      end,
+      desc = "Grep Word or Selection",
+      mode = { "n", "x" },
+    },
+    {
       "<leader>;:",
       function()
         Snacks.picker.command_history()
@@ -205,6 +220,13 @@ return {
         Snacks.picker.smart()
       end,
       desc = "Smart picker",
+    },
+    {
+      "<leader>;r",
+      function()
+        Snacks.picker.registers()
+      end,
+      desc = "Registers",
     },
     {
       "<leader>;a",
@@ -226,6 +248,56 @@ return {
         Snacks.picker.help()
       end,
       desc = "Help Tags",
+    },
+    {
+      "<leader>;d",
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      desc = "Diagnostics",
+    },
+    {
+      "<leader>;k",
+      function()
+        Snacks.picker.keymaps()
+      end,
+      desc = "Keymaps",
+    },
+    {
+      "gd",
+      function()
+        Snacks.picker.lsp_definitions()
+      end,
+      desc = "Goto Definition",
+    },
+    {
+      "gr",
+      function()
+        Snacks.picker.lsp_references()
+      end,
+      nowait = true,
+      desc = "References",
+    },
+    {
+      "gI",
+      function()
+        Snacks.picker.lsp_implementations()
+      end,
+      desc = "Goto Implementation",
+    },
+    {
+      "<leader>D",
+      function()
+        Snacks.picker.lsp_type_definitions()
+      end,
+      desc = "Goto Type Definition",
+    },
+    {
+      "<leader>;s",
+      function()
+        Snacks.picker.lsp_symbols()
+      end,
+      desc = "LSP Symbols",
     },
   },
   init = function()
