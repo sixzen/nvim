@@ -1,10 +1,10 @@
 return {
-  "rcarriga/nvim-dap-ui", -- Debugger UIs
+  "rcarriga/nvim-dap-ui",    -- Debugger UIs
   dependencies = {
-    "mfussenegger/nvim-dap",  -- Debugger
+    "mfussenegger/nvim-dap", -- Debugger
     "theHamsta/nvim-dap-virtual-text",
-    "nvim-telescope/telescope-dap.nvim",
-    "rcarriga/cmp-dap",
+    -- "nvim-telescope/telescope-dap.nvim",
+    -- "rcarriga/cmp-dap",
     "nvim-neotest/nvim-nio",
   },
   keys = { { "<leader>d" } },
@@ -66,6 +66,13 @@ return {
         port = 5005,
       },
       {
+        name = "Debug Attach (5000)",
+        type = "java",
+        request = "attach",
+        hostName = "127.0.0.1",
+        port = 5000,
+      },
+      {
         name = "My Custom Java Run Configuration",
         type = "java",
         request = "launch",
@@ -120,8 +127,8 @@ return {
       },
       floating = {
         max_height = 0.9,
-        max_width = 0.5,             -- Floats will be treated as percentage of your screen.
-        border = vim.g.border_chars, -- Border style. Can be 'single', 'double' or 'rounded'
+        max_width = 0.5,    -- Floats will be treated as percentage of your screen.
+        border = "solid", -- Border style. Can be 'single', 'double' or 'rounded'
         mappings = {
           close = { "q", "<Esc>" },
         },
@@ -164,5 +171,6 @@ return {
     vim.keymap.set("n", "<leader>ds", dap.continue)
     vim.keymap.set("n", "<leader>dq", dap.close)
     vim.keymap.set("n", "<leader>dU", dapui.toggle)
+    vim.keymap.set({ "n", "x" }, "<leader>k", dapui.eval)
   end,
 }

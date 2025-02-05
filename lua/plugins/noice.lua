@@ -32,6 +32,7 @@ return {
           },
         },
       },
+      notify = { enabled = false },
       presets = {
         bottom_search = true,
         long_message_to_split = true,
@@ -57,8 +58,8 @@ return {
         -- border = "rounded",
         -- },
         hover = {
-          -- border = "rounded",
-          -- position = { row = 2, col = 2 },
+          border = "solid",
+          position = { row = 2, col = 2 },
           silent = true,
           win_options = {
             winhighlight = {
