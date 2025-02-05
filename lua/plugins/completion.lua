@@ -292,7 +292,7 @@ return {
       },
 
       sources = {
-        default = { "lazydev", "lsp", "path", "buffer", "dadbod", "markdown", "snippets", "emoji" },
+        default = { "lazydev", "lsp", "path", "buffer", "dadbod", "markdown", "snippets", "emoji", "ecolog" },
         providers = {
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
           markdown = { name = "RenderMarkdown", module = "render-markdown.integ.blink" },
@@ -370,6 +370,7 @@ return {
             module = "blink.cmp.sources.buffer",
             min_keyword_length = 3,
           },
+          ecolog = { name = "ecolog", module = "ecolog.integrations.cmp.blink_cmp" },
         },
         -- cmdline = function()
         --   local type = vim.fn.getcmdtype()
