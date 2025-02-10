@@ -135,7 +135,7 @@ local config = {
         },
       },
       format = {
-        enabled = true,
+        enabled = false,
       },
       signatureHelp = { enabled = true },
     },
