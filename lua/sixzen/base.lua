@@ -1,5 +1,7 @@
 vim.cmd "autocmd!"
 
+local shell = "nu"
+
 vim.scriptencoding = "utf-8"
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
@@ -9,8 +11,17 @@ vim.opt.relativenumber = true
 
 vim.opt.completeopt = { "menuone", "noselect" }
 
--- vim.opt.shell = "nu"
--- vim.opt.shellredir = "| save"
+vim.opt.shell = shell
+if shell == "nu" then
+  vim.opt.shellredir = "out+err> %s"
+  vim.opt.shellcmdflag = "--stdin --no-newline -c"
+  vim.opt.shelltemp = false
+  vim.opt.shellxescape = ""
+  vim.opt.shellxquote = ""
+  vim.opt.shellquote = ""
+  vim.opt.shellpipe =
+  "| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record"
+end
 vim.opt.showmode = false
 vim.opt.showtabline = 2
 vim.opt.hidden = true

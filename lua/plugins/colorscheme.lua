@@ -135,6 +135,7 @@ return {
 
             MiniFilesTitle = { bg = colors.mantle },
             MiniFilesTitleFocused = { bg = colors.mantle },
+            MiniFilesBorderModified = { fg = colors.peach, bg = colors.mantle },
           }
         end,
         integrations = {
