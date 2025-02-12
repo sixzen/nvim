@@ -31,6 +31,9 @@ return {
             enabled = false,
           },
         },
+        hover = {
+          silent = true,
+        }
       },
       notify = { enabled = false },
       presets = {
@@ -60,7 +63,6 @@ return {
         hover = {
           border = "solid",
           position = { row = 2, col = 2 },
-          silent = true,
           win_options = {
             winhighlight = {
               Normal = "FloatHover",
