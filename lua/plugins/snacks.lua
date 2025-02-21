@@ -285,13 +285,13 @@ return {
       end,
       desc = "Goto Implementation",
     },
-    {
-      "<leader>D",
-      function()
-        Snacks.picker.lsp_type_definitions()
-      end,
-      desc = "Goto Type Definition",
-    },
+    -- {
+    --   "<leader>D",
+    --   function()
+    --     Snacks.picker.lsp_type_definitions()
+    --   end,
+    --   desc = "Goto Type Definition",
+    -- },
     {
       "<leader>;s",
       function()

@@ -295,7 +295,7 @@ return {
         default = { "lazydev", "lsp", "path", "buffer", "dadbod", "markdown", "snippets", "emoji", "ecolog" },
         providers = {
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-          markdown = { name = "RenderMarkdown", module = "render-markdown.integ.blink" },
+          markdown = { name = "RenderMarkdown", module = "render-markdown.integ.blink", fallbacks = { "lsp" } },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
@@ -395,6 +395,15 @@ return {
         --   return {}
         -- end,
       },
+      -- cmdline = {
+      --   completion = {
+      --     menu = {
+      --       draw = {
+      --         columns = { { "kind_icon", "label", "label_description" } },
+      --       },
+      --     },
+      --   },
+      -- },
       snippets = {
         preset = "luasnip",
         expand = function(snippet)
