@@ -4,7 +4,6 @@ return {
   build = "make",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
-    "stevearc/dressing.nvim",
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     "echasnovski/mini.icons", -- or echasnovski/mini.icons
@@ -16,9 +15,9 @@ return {
     ---@alias Provider1 "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
     provider = "copilot",
     -- auto_suggestions_provider = "copilot",
-    copilot = {
-      model = "claude-3.5-sonnet", -- o1-preview | o1-mini | claude-3.5-sonnet
-    },
+    -- copilot = {
+    --   model = "claude-3.5-sonnet", -- o1-preview | o1-mini | claude-3.5-sonnet
+    -- },
     behaviour = {
       auto_suggestions = false, -- Experimental stage
       auto_set_highlight_group = true,
