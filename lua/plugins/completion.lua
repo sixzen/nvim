@@ -264,7 +264,7 @@ return {
     dependencies = { "L3MON4D3/LuaSnip", "moyiz/blink-emoji.nvim" },
     enabled = true,
     event = { "InsertEnter", "CmdlineEnter" },
-    version = "v0.*",
+    version = "*",
     opts = {
       keymap = { preset = "default" },
 
@@ -305,8 +305,6 @@ return {
             name = "lsp",
             enabled = true,
             module = "blink.cmp.sources.lsp",
-            -- kind = "LSP",
-            score_offset = 90, -- the higher the number, the higher the priority
           },
           snippets = {
             name = "snippets",
@@ -314,15 +312,14 @@ return {
             module = "blink.cmp.sources.snippets",
             min_keyword_length = 2,
             -- fallbacks = { "snippets" },
-            score_offset = 95,
-            max_items = 8,
+            score_offset = 100,
+            max_items = 15,
             should_show_items = function()
               local col = vim.api.nvim_win_get_cursor(0)[2]
               local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
               return before_cursor:match(trigger_text .. "%w*$") ~= nil
             end,
-            transform_items = function(ctx, items)
-              local _ = ctx
+            transform_items = function(_, items)
               local col = vim.api.nvim_win_get_cursor(0)[2]
               local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
               local trigger_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
@@ -346,7 +343,6 @@ return {
           emoji = {
             module = "blink-emoji",
             name = "Emoji",
-            score_offset = 15,        -- Tune by preference
             opts = { insert = true }, -- Insert emoji (default) or complete its name
           },
           path = {
@@ -406,20 +402,8 @@ return {
       -- },
       snippets = {
         preset = "luasnip",
-        expand = function(snippet)
-          require("luasnip").lsp_expand(snippet)
-        end,
-        active = function(filter)
-          if filter and filter.direction then
-            return require("luasnip").jumpable(filter.direction)
-          end
-          return require("luasnip").in_snippet()
-        end,
-        jump = function(direction)
-          require("luasnip").jump(direction)
-        end,
       },
-
+      fuzzy = { implementation = "prefer_rust_with_warning" },
       -- signature = { enabled = true },
     },
     opts_extend = { "sources.default" },
