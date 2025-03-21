@@ -158,6 +158,7 @@ return {
           noice = true,
           snacks = true,
           blink_cmp = false,
+          grug_far = true,
           -- lsp_saga = true,
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
