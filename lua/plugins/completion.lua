@@ -325,18 +325,19 @@ return {
               local trigger_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
               if trigger_pos then
                 for _, item in ipairs(items) do
-                  item.textEdit = {
-                    newText = item.insertText or item.label,
-                    range = {
-                      start = { line = vim.fn.line "." - 1, character = trigger_pos - 1 },
-                      ["end"] = { line = vim.fn.line "." - 1, character = col },
-                    },
-                  }
+                  if not item.trigger_text_modified then
+                    ---@diagnostic disable-next-line: inject-field
+                    item.trigger_text_modified = true
+                    item.textEdit = {
+                      newText = item.insertText or item.label,
+                      range = {
+                        start = { line = vim.fn.line "." - 1, character = trigger_pos - 1 },
+                        ["end"] = { line = vim.fn.line "." - 1, character = col },
+                      },
+                    }
+                  end
                 end
               end
-              vim.schedule(function()
-                require("blink.cmp").reload "snippets"
-              end)
               return items
             end,
           },
