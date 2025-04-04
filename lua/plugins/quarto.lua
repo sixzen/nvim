@@ -80,7 +80,7 @@ return {
       vim.keymap.set({ "n", "i" }, "<M-r>", insert_r_chunk)
       vim.keymap.set("n", "<leader>qrt", show_r_table, { silent = true, noremap = true })
       vim.keymap.set("n", "<leader>qp", quarto.quartoPreview, { silent = true, noremap = true })
-      vim.keymap.set({ "n", "i" }, "<leader><cr>", quarto.quartoSend, { silent = true, noremap = true })
+      vim.keymap.set({ "n" }, "<leader><cr>", quarto.quartoSend, { silent = true, noremap = true })
       vim.keymap.set(
         "n",
         "<leader>qtp",
