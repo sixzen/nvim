@@ -33,22 +33,22 @@ return {
           show_end = 1,
           min_mask = 5,
         },
-        mask_char = "*", -- Character used for masking
+        mask_char = "*",       -- Character used for masking
+        skip_comments = false, -- Skip masking comment lines in environment files (default: false)
       },
       modules = {
-        cmp = true,                   -- Enabled to mask values in completion
-        peek = false,                 -- Enable to mask values in peek view
+        cmp = true,                  -- Enabled to mask values in completion
+        peek = false,                -- Enable to mask values in peek view
         files = {
           shelter_on_leave = true,   -- Control automatic re-enabling of shelter when leaving buffer
-          disable_cmp = true,         -- Disable completion in sheltered buffers (default: true)
-          skip_comments = false,      -- Skip masking comment lines in environment files (default: false)
+          disable_cmp = true,        -- Disable completion in sheltered buffers (default: true)
         },
-        telescope = false,            -- Enable to mask values in telescope integration
-        telescope_previewer = false,  -- Enable to mask values in telescope preview buffers
-        fzf = false,                  -- Enable to mask values in fzf picker
-        fzf_previewer = false,        -- Enable to mask values in fzf preview buffers
-        snacks_previewer = true,      -- Enable to mask values in snacks previewer
-        snacks = true,                -- Enable to mask values in snacks picker
+        telescope = false,           -- Enable to mask values in telescope integration
+        telescope_previewer = false, -- Enable to mask values in telescope preview buffers
+        fzf = false,                 -- Enable to mask values in fzf picker
+        fzf_previewer = false,       -- Enable to mask values in fzf preview buffers
+        snacks_previewer = true,     -- Enable to mask values in snacks previewer
+        snacks = true,               -- Enable to mask values in snacks picker
       },
     },
     -- true by default, enables built-in types (database_url, url, etc.)
