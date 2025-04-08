@@ -2,7 +2,7 @@ return {
   {
     "folke/tokyonight.nvim",
     enabled = false,
-    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- load the colorscheme here
@@ -32,7 +32,7 @@ return {
           variables = {},
           -- Background styles. Can be "dark", "transparent" or "normal"
           sidebars = "dark", -- style for sidebars, see below
-          floats = "dark",   -- style for floating windows
+          floats = "dark", -- style for floating windows
         },
 
         on_colors = function(colors)
@@ -48,7 +48,7 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require("catppuccin").setup {
@@ -158,6 +158,9 @@ return {
           noice = true,
           snacks = true,
           blink_cmp = false,
+          mini = {
+            enabled = true,
+          },
           grug_far = true,
           -- lsp_saga = true,
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
