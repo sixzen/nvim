@@ -1,6 +1,7 @@
 return {
   "nvimtools/none-ls.nvim",
   lazy = true,
+  enabled = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
   },

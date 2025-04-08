@@ -39,14 +39,14 @@ M.on_attach = function(client, bufnr)
     -- end)
   end
   if client.name == "eslint" then
-    if require("null-ls").is_registered "prettier" then
-      client.server_capabilities.document_formatting = false
-    else
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = bufnr,
-        command = "EslintFixAll",
-      })
-    end
+    -- if require("null-ls").is_registered "prettier" then
+    --   client.server_capabilities.document_formatting = false
+    -- else
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+    -- end
   end
   -- if client.server_capabilities.inlayHintProvider then
   --   vim.keymap.set("n", "<leader>ih", function()
@@ -73,7 +73,7 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
   vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
   vim.keymap.set({ "n" }, "<leader>cA", lspUtils.action.source, opts)
-  vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
+  -- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
 end
 
 M.capabilities = function()
