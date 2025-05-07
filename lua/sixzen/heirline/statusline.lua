@@ -484,10 +484,10 @@ local Diagnostics = {
     {
       condition = conditions.has_diagnostics,
       static = {
-        error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
-        warn_icon = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
-        info_icon = vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text,
-        hint_icon = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text,
+        error_icon = SIGNS.Error,
+        warn_icon = SIGNS.Warn,
+        info_icon = SIGNS.Info,
+        hint_icon = SIGNS.Hint,
       },
       init = function(self)
         self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })

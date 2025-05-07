@@ -1,39 +1,17 @@
 return {
   "L3MON4D3/LuaSnip", -- Snippets
   enabled = true,
-  event = "InsertEnter",
+  build = "make install_jsregexp",
   dependencies = {
     {
       "rafamadriz/friendly-snippets",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+        require("luasnip.loaders.from_vscode").lazy_load { paths = { vim.fn.stdpath "config" .. "/snippets" } }
+      end,
     },
   },
-  version = "v2.*",
-  build = "make install_jsregexp",
-  config = function()
-    local luasnip = require "luasnip"
-
-    local options = {
-      history = true,
-      updateevents = "TextChanged,TextChangedI",
-    }
-
-    luasnip.config.set_config(options)
-    require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.luasnippets_path or "" }
-    require("luasnip.loaders.from_vscode").lazy_load()
-    require("luasnip").filetype_extend("javascript", { "javascriptreact" })
-    require("luasnip").filetype_extend("javascript", { "html" })
-
-    vim.api.nvim_create_autocmd("InsertLeave", {
-      callback = function()
-        if
-            require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-            and not require("luasnip").session.jump_active
-        then
-          require("luasnip").unlink_current()
-        end
-      end,
-    })
-
+  opts = function(_, opts)
     local ls = require "luasnip"
 
     -- Add prefix ";" to each one of my snippets using the extend_decorator
@@ -70,5 +48,10 @@ return {
     -- keymap("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
 
     require "config.snippets"
+
+    return {
+      history = true,
+      delete_check_events = "TextChanged",
+    }
   end,
 }

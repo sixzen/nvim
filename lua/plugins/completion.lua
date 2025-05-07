@@ -5,14 +5,14 @@ return {
     enabled = false,
     dependencies = {
       "saadparwaiz1/cmp_luasnip", --cmp luasnip
-      "hrsh7th/cmp-path",         -- nvim-cmp buffer for paths
-      "hrsh7th/cmp-buffer",       -- nvim-cmp source for buffer words
-      "hrsh7th/cmp-nvim-lsp",     -- nvim-cmp source for neovim',s built-in LSP
-      "hrsh7th/cmp-nvim-lua",     -- nvim-cmp for lua
-      "hrsh7th/cmp-git",          -- nvim-cmp for git
-      "hrsh7th/cmp-cmdline",      -- nvim-cmp for cmdline
-      "hrsh7th/cmp-emoji",        -- nvim-cmp source for emojis
-      "L3MON4D3/LuaSnip",         -- Snippets
+      "hrsh7th/cmp-path", -- nvim-cmp buffer for paths
+      "hrsh7th/cmp-buffer", -- nvim-cmp source for buffer words
+      "hrsh7th/cmp-nvim-lsp", -- nvim-cmp source for neovim',s built-in LSP
+      "hrsh7th/cmp-nvim-lua", -- nvim-cmp for lua
+      "hrsh7th/cmp-git", -- nvim-cmp for git
+      "hrsh7th/cmp-cmdline", -- nvim-cmp for cmdline
+      "hrsh7th/cmp-emoji", -- nvim-cmp source for emojis
+      "L3MON4D3/LuaSnip", -- Snippets
       {
         "js-everts/cmp-tailwind-colors",
         opts = {
@@ -261,7 +261,7 @@ return {
   {
     -- inspired by https://github.com/linkarzu/dotfiles-latest/blob/main/neovim/neobean/lua/plugins/blink-cmp.lua
     "saghen/blink.cmp",
-    dependencies = { "L3MON4D3/LuaSnip", "moyiz/blink-emoji.nvim" },
+    dependencies = { "L3MON4D3/LuaSnip", "moyiz/blink-emoji.nvim", "Kaiser-Yang/blink-cmp-avante" },
     enabled = true,
     event = { "InsertEnter", "CmdlineEnter" },
     version = "*",
@@ -292,7 +292,7 @@ return {
       },
 
       sources = {
-        default = { "lazydev", "lsp", "path", "buffer", "dadbod", "markdown", "snippets", "emoji", "ecolog" },
+        default = { "lazydev", "lsp", "path", "buffer", "dadbod", "markdown", "snippets", "emoji", "ecolog", "avante" },
         providers = {
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
           markdown = { name = "RenderMarkdown", module = "render-markdown.integ.blink", fallbacks = { "lsp" } },
@@ -320,10 +320,11 @@ return {
               return before_cursor:match(trigger_text .. "%w*$") ~= nil
             end,
             transform_items = function(_, items)
+              local line = vim.api.nvim_get_current_line()
               local col = vim.api.nvim_win_get_cursor(0)[2]
-              local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
-              local trigger_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
-              if trigger_pos then
+              local before_cursor = line:sub(1, col)
+              local start_pos, end_pos = before_cursor:find(trigger_text .. "[^" .. trigger_text .. "]*$")
+              if start_pos then
                 for _, item in ipairs(items) do
                   if not item.trigger_text_modified then
                     ---@diagnostic disable-next-line: inject-field
@@ -331,8 +332,8 @@ return {
                     item.textEdit = {
                       newText = item.insertText or item.label,
                       range = {
-                        start = { line = vim.fn.line "." - 1, character = trigger_pos - 1 },
-                        ["end"] = { line = vim.fn.line "." - 1, character = col },
+                        start = { line = vim.fn.line "." - 1, character = start_pos - 1 },
+                        ["end"] = { line = vim.fn.line "." - 1, character = end_pos },
                       },
                     }
                   end
@@ -345,6 +346,10 @@ return {
             module = "blink-emoji",
             name = "Emoji",
             opts = { insert = true }, -- Insert emoji (default) or complete its name
+          },
+          avante = {
+            module = "blink-cmp-avante",
+            name = "Avante",
           },
           path = {
             name = "Path",
