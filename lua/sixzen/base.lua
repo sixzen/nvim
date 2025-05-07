@@ -8,6 +8,7 @@ vim.opt.fileencoding = "utf-8"
 
 vim.wo.number = true
 vim.opt.relativenumber = true
+vim.opt.guifont = "Monolisa Simple Script,Symbols Nerd Font:h11"
 
 vim.opt.completeopt = { "menuone", "noselect" }
 

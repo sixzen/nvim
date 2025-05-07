@@ -1,3 +1,4 @@
+local transparent = not vim.g.neovide
 return {
   {
     "folke/tokyonight.nvim",
@@ -58,7 +59,7 @@ return {
           light = "latte",
           dark = "mocha",
         },
-        transparent_background = true,
+        transparent_background = transparent,
         show_end_of_buffer = false, -- show the '~' characters after the end of buffers
         term_colors = false,
         dim_inactive = {
