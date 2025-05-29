@@ -15,6 +15,7 @@ return {
     formatters_by_ft = {
       lua = { "stylua", lsp_format = "fallback" },
       json = { "jq" },
+      python = { "ruff", "isort", "black" },
     },
   },
 }

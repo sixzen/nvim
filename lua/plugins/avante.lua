@@ -9,14 +9,38 @@ return {
     "echasnovski/mini.icons", -- or echasnovski/mini.icons
     "zbirenbaum/copilot.lua", -- for providers='copilot'
   },
-  version = false,            -- set this if you want to always pull the latest change
+  version = false, -- set this if you want to always pull the latest change
   opts = {
     -- add any opts here
     ---@alias Provider1 "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
     provider = "copilot",
     -- auto_suggestions_provider = "copilot",
+    file_selector = {
+      provider = "snacks",
+    },
     copilot = {
       model = "claude-3.5-sonnet", -- o1-preview | o1-mini | claude-3.5-sonnet
+    },
+    system_prompt = function()
+      local hub = require("mcphub").get_hub_instance()
+      return hub and hub:get_active_servers_prompt() or ""
+    end,
+    custom_tools = function()
+      return {
+        require("mcphub.extensions.avante").mcp_tool(),
+      }
+    end,
+    disabled_tools = {
+      "list_files", -- Built-in file operations
+      "search_files",
+      "read_file",
+      "create_file",
+      "rename_file",
+      "delete_file",
+      "create_dir",
+      "rename_dir",
+      "delete_dir",
+      "bash", -- Built-in terminal access
     },
     behaviour = {
       auto_suggestions = false, -- Experimental stage
@@ -61,10 +85,10 @@ return {
     windows = {
       ---@type "right" | "left" | "top" | "bottom"
       position = "right", -- the position of the sidebar
-      wrap = true,        -- similar to vim.o.wrap
-      width = 30,         -- default % based on available width
+      wrap = true, -- similar to vim.o.wrap
+      width = 30, -- default % based on available width
       sidebar_header = {
-        enabled = true,   -- true, false to enable/disable the header
+        enabled = true, -- true, false to enable/disable the header
         align = "center", -- left, center, right for title
         rounded = true,
       },
@@ -77,7 +101,7 @@ return {
         start_insert = true, -- Start insert mode when opening the edit window
       },
       ask = {
-        floating = false,    -- Open the 'AvanteAsk' prompt in a floating window
+        floating = false, -- Open the 'AvanteAsk' prompt in a floating window
         start_insert = true, -- Start insert mode when opening the ask window
         border = "rounded",
         ---@type "ours" | "theirs"
