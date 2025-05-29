@@ -21,10 +21,10 @@ if vim.fn.has "mac" == 1 then
 end
 
 -- Setup Capabilities
-local capabilities = require("sixzen.lsp").capabilities()
-local extendedClientCapabilities = jdtls.extendedClientCapabilities
-extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
-extendedClientCapabilities.onCompletionItemSelectedCommand = "editor.action.triggerParameterHints"
+-- local capabilities = require("sixzen.lsp").capabilities()
+-- local extendedClientCapabilities = jdtls.extendedClientCapabilities
+-- extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+-- extendedClientCapabilities.onCompletionItemSelectedCommand = "editor.action.triggerParameterHints"
 
 -- Setup Testing and Debugging
 local bundles = {}
@@ -61,7 +61,7 @@ local config = {
     workspace_dir,
   },
   root_dir = require("jdtls.setup").find_root { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" },
-  capabilities = capabilities,
+  -- capabilities = capabilities,
 
   settings = {
     java = {
@@ -142,14 +142,14 @@ local config = {
   },
   init_options = {
     bundles = bundles,
-    extendedClientCapabilities = extendedClientCapabilities,
+    -- extendedClientCapabilities = extendedClientCapabilities,
   },
 }
 
 config["on_attach"] = function(client, bufnr)
   local _, _ = pcall(vim.lsp.codelens.refresh)
   require("jdtls").setup_dap { hotcodereplace = "auto" }
-  require("sixzen.lsp").on_attach(client, bufnr)
+  -- require("sixzen.lsp").on_attach(client, bufnr)
   local status_ok, jdtls_dap = pcall(require, "jdtls.dap")
   if status_ok then
     jdtls_dap.setup_dap_main_class_configs()

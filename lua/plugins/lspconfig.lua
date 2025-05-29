@@ -3,9 +3,9 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     -- "SmiteshP/nvim-navic", -- Breadcrumb
-    "nvimtools/none-ls.nvim",
+    -- "nvimtools/none-ls.nvim",
     "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    -- "williamboman/mason-lspconfig.nvim",
     {
       "folke/lazydev.nvim",
       ft = "lua", -- only load on lua files
