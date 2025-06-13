@@ -3,6 +3,7 @@ return {
   ft = { "markdown", "Avante" },
   opts = {
     file_types = { "markdown", "Avante" },
+    completions = { lsp = { enabled = true } },
     win_options = {
       conceallevel = {
         default = 0,

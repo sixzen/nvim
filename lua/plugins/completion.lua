@@ -292,10 +292,9 @@ return {
       },
 
       sources = {
-        default = { "lazydev", "lsp", "path", "buffer", "dadbod", "markdown", "snippets", "emoji", "ecolog", "avante" },
+        default = { "lazydev", "lsp", "path", "buffer", "dadbod", "snippets", "emoji", "ecolog", "avante" },
         providers = {
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-          markdown = { name = "RenderMarkdown", module = "render-markdown.integ.blink", fallbacks = { "lsp" } },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",

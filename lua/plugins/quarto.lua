@@ -88,7 +88,6 @@ return {
         { silent = true, noremap = true }
       )
       vim.keymap.set("n", "<leader>qtr", ":vsplit term://R --no-save<cr>G<C-w>h", { silent = true, noremap = true })
-      vim.cmd "TSContextDisable"
     end,
     dependencies = {
       -- for language features in code cells

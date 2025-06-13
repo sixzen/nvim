@@ -18,8 +18,10 @@ return {
     file_selector = {
       provider = "snacks",
     },
-    copilot = {
-      model = "claude-3.5-sonnet", -- o1-preview | o1-mini | claude-3.5-sonnet
+    providers = {
+      copilot = {
+        model = "claude-3.5-sonnet", -- o1-preview | o1-mini | claude-3.5-sonnet
+      },
     },
     system_prompt = function()
       local hub = require("mcphub").get_hub_instance()
