@@ -49,7 +49,6 @@ vim.lsp.enable {
   "gopls",
   "html",
   "jsonls",
-  "kulala_ls",
   "lemminx",
   "lua_ls",
   "marksman",
