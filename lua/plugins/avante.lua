@@ -15,7 +15,7 @@ return {
     ---@alias Provider1 "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
     provider = "copilot",
     -- auto_suggestions_provider = "copilot",
-    file_selector = {
+    selector = {
       provider = "snacks",
     },
     providers = {

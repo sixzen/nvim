@@ -15,9 +15,10 @@ vim.diagnostic.config {
       [vim.diagnostic.severity.WARN] = "WarningMsg",
     },
   },
-  virtual_text = {
-    prefix = "●",
-  },
+  virtual_text = false,
+  -- virtual_text = {
+  --   prefix = "●",
+  -- },
   -- virtual_lines = true,
   update_in_insert = false,
   float = {
