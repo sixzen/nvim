@@ -11,7 +11,6 @@ return {
     --     disable_filetype = { "TelescopePrompt", "vim" },
     --   },
     -- },
-    { "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
     {
       "nvim-treesitter/nvim-treesitter-context",
       config = function()
