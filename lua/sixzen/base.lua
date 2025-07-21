@@ -21,7 +21,7 @@ if shell == "nu" then
   vim.opt.shellxquote = ""
   vim.opt.shellquote = ""
   vim.opt.shellpipe =
-  "| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record"
+    "| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record"
 end
 vim.opt.showmode = false
 vim.opt.showtabline = 2
@@ -53,13 +53,13 @@ vim.opt.mouse = "a"
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.laststatus = 3 -- always show status line
-vim.opt.ai = true      -- Auto Indent
-vim.opt.si = true      -- Smart Indent
-vim.opt.wrap = false   -- No Wrap Lines
+vim.opt.ai = true -- Auto Indent
+vim.opt.si = true -- Smart Indent
+vim.opt.wrap = false -- No Wrap Lines
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv "HOME" .. "/.cache/nvim/undodir"
 vim.opt.backspace = "start,eol,indent"
-vim.opt.path:append { "**" }   -- Finding files - Search down into subfolders
+vim.opt.path:append { "**" } -- Finding files - Search down into subfolders
 vim.opt.wildignore:append { "*/node_modules/*" }
 vim.opt.spelllang:append "cjk" -- disable spellchecking for asian characters (VIM algorithm does not support it)
 vim.opt.whichwrap:append "<,>,[,],h,l"
@@ -110,3 +110,5 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
     vim.cmd.setlocal "nonumber"
   end,
 })
+
+vim.g.markdown_recommended_style = 0
