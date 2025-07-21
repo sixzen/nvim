@@ -1,8 +1,11 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
-  ft = { "markdown", "Avante" },
+  ft = { "markdown", "Avante", "quarto" },
   opts = {
-    file_types = { "markdown", "Avante" },
+    code = {
+      conceal_delimiters = false,
+    },
+    file_types = { "markdown", "Avante", "quarto" },
     completions = { lsp = { enabled = true } },
     win_options = {
       conceallevel = {

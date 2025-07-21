@@ -18,6 +18,14 @@ return {
     selector = {
       provider = "snacks",
     },
+    input = {
+      provider = "snacks",
+      provider_opts = {
+        -- Additional snacks.input options
+        title = "Avante Input",
+        icon = " ",
+      },
+    },
     providers = {
       copilot = {
         model = "claude-3.5-sonnet", -- o1-preview | o1-mini | claude-3.5-sonnet
@@ -50,6 +58,9 @@ return {
       auto_set_keymaps = true,
       auto_apply_diff_after_generation = false,
       support_paste_from_clipboard = false,
+      minimize_diff = true,
+      enable_token_counting = true,
+      auto_approve_tool_permissions = false,
     },
     mappings = {
       --- @class AvanteConflictMappings
