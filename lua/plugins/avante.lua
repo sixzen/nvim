@@ -28,7 +28,7 @@ return {
     },
     providers = {
       copilot = {
-        model = "claude-3.5-sonnet", -- o1-preview | o1-mini | claude-3.5-sonnet
+        model = "claude-sonnet-4", -- o1-preview | o1-mini | claude-3.5-sonnet
       },
     },
     system_prompt = function()
