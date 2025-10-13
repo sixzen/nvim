@@ -10,7 +10,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Blazing fast replace a word
-vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word" })
 
 -- Do not yank with x
 vim.keymap.set("n", "x", '"_x')
@@ -27,7 +27,7 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- New tab
-vim.keymap.set("n", "<leader>te", ":tabedit<Return>", { silent = true })
+vim.keymap.set("n", "<leader>te", ":tabedit<Return>", { desc = "Tab Edit", silent = true })
 -- Split window
 -- vim.keymap.set("n", "<leader>ss", ":split<Return><C-w>w", { silent = true })
 -- vim.keymap.set("n", "<leader>sv", ":vsplit<Return><C-w>w", { silent = true })

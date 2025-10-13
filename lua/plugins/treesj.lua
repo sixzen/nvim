@@ -1,6 +1,9 @@
 return {
   "Wansmer/treesj",
-  keys = { "<leader>m", "<leader>M" },
+  keys = {
+    { "<leader>m", function() require("treesj").toggle() end, desc = "TreeSJ toggle split/join" },
+    { "<leader>M", function() require("treesj").toggle { split = { recursive = true } } end, desc = "TreeSJ toggle recursive" },
+  },
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()
     local treesj = require "treesj"
@@ -28,11 +31,5 @@ return {
       -- Use `dot` for repeat action
       dot_repeat = true,
     }
-    -- For use default preset and it work with dot
-    vim.keymap.set("n", "<leader>m", treesj.toggle)
-    -- For extending default preset with `recursive = true`, but this doesn't work with dot
-    vim.keymap.set("n", "<leader>M", function()
-      treesj.toggle { split = { recursive = true } }
-    end)
   end,
 }

@@ -76,18 +76,18 @@ return {
       --   insert_code_chunk "ojs"
       -- end
 
-      vim.keymap.set({ "n", "i" }, "<M-c>", insert_py_chunk)
-      vim.keymap.set({ "n", "i" }, "<M-r>", insert_r_chunk)
-      vim.keymap.set("n", "<leader>qrt", show_r_table, { silent = true, noremap = true })
-      vim.keymap.set("n", "<leader>qp", quarto.quartoPreview, { silent = true, noremap = true })
-      vim.keymap.set({ "n" }, "<leader><cr>", quarto.quartoSend, { silent = true, noremap = true })
+      vim.keymap.set({ "n", "i" }, "<M-c>", insert_py_chunk, { desc = "Insert Python code chunk" })
+      vim.keymap.set({ "n", "i" }, "<M-r>", insert_r_chunk, { desc = "Insert R code chunk" })
+      vim.keymap.set("n", "<leader>qrt", show_r_table, { silent = true, noremap = true, desc = "Show R table with DT::datatable" })
+      vim.keymap.set("n", "<leader>qp", quarto.quartoPreview, { silent = true, noremap = true, desc = "Preview Quarto document" })
+      vim.keymap.set({ "n" }, "<leader><cr>", quarto.quartoSend, { silent = true, noremap = true, desc = "Send code to REPL" })
       vim.keymap.set(
         "n",
         "<leader>qtp",
         ":vsplit term://ipython  --no-confirm-exit<cr>G<C-w>h",
-        { silent = true, noremap = true }
+        { silent = true, noremap = true, desc = "Open IPython terminal in vertical split" }
       )
-      vim.keymap.set("n", "<leader>qtr", ":vsplit term://R --no-save<cr>G<C-w>h", { silent = true, noremap = true })
+      vim.keymap.set("n", "<leader>qtr", ":vsplit term://R --no-save<cr>G<C-w>h", { silent = true, noremap = true, desc = "Open R terminal in vertical split" })
     end,
     dependencies = {
       -- for language features in code cells
@@ -189,8 +189,10 @@ return {
     },
     config = function(_, opts)
       require("img-clip").setup(opts)
-      vim.keymap.set("n", "<leader>ii", ":PasteImage<cr>", { desc = "insert [i]mage from clipboard" })
     end,
+    keys = {
+      { "<leader>ii", ":PasteImage<cr>", desc = "Insert image from clipboard" },
+    },
   },
 
   { -- preview equations
@@ -198,7 +200,13 @@ return {
     event = "BufEnter",
     ft = { "markdown", "quarto", "latex" },
     keys = {
-      { "<leader>qm", ':lua require"nabla".toggle_virt()<cr>', desc = "toggle [m]ath equations" },
+      {
+        "<leader>qm",
+        function()
+          require("nabla").toggle_virt()
+        end,
+        desc = "toggle [m]ath equations",
+      },
     },
   },
 

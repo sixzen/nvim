@@ -1,12 +1,14 @@
 return {
   "olexsmir/gopher.nvim",
   ft = "go",
+  keys = {
+    { "<leader>cgj", "<cmd>GoTagAdd json<CR>", desc = "Go add JSON tags" },
+    { "<leader>cgd", "<cmd>GoTagAdd db<CR>", desc = "Go add DB tags" },
+    { "<leader>cgy", "<cmd>GoTagAdd yaml<CR>", desc = "Go add YAML tags" },
+  },
   config = function()
     local gopher = require "gopher"
     gopher.setup {}
-    vim.keymap.set("n", "<leader>cgj", "<cmd>GoTagAdd json<CR>", { noremap = true, silent = true })
-    vim.keymap.set("n", "<leader>cgd", "<cmd>GoTagAdd db<CR>", { noremap = true, silent = true })
-    vim.keymap.set("n", "<leader>cgy", "<cmd>GoTagAdd yaml<CR>", { noremap = true, silent = true })
   end,
   build = function()
     vim.cmd [[silent! GoInstallDeps]]

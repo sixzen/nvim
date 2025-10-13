@@ -1,6 +1,8 @@
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  -- keys = { {} },
+  keys = {
+    { "<leader>e", "<cmd>Neotree toggle reveal=true position=float<CR>", desc = "Toggle file explorer" },
+  },
   event = "UIEnter",
   enabled = false,
   branch = "v3.x",
@@ -265,8 +267,6 @@ return {
         },
       },
     }
-
-    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle reveal=true position=float<CR>")
 
     -- local normal_hl = vim.api.nvim_get_hl_by_name("TabLine", true)
     -- local visual_hl = vim.api.nvim_get_hl_by_name("Visual", true)
