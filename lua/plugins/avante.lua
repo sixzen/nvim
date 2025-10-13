@@ -28,7 +28,7 @@ return {
     },
     providers = {
       copilot = {
-        model = "claude-sonnet-4", -- o1-preview | o1-mini | claude-3.5-sonnet
+        model = "claude-sonnet-4.5", -- o1-preview | o1-mini | claude-3.5-sonnet
       },
     },
     system_prompt = function()
@@ -94,7 +94,10 @@ return {
         reverse_switch_windows = "<S-Tab>",
       },
     },
-    hints = { enabled = false },
+    selection = {
+      enabled = true,
+      hint_display = "none",
+    },
     windows = {
       ---@type "right" | "left" | "top" | "bottom"
       position = "right", -- the position of the sidebar

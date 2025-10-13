@@ -21,7 +21,7 @@ return {
       end
     end,
   },
-  { "mbbill/undotree",   keys = { { "<leader>U", "<cmd>UndotreeToggle<CR>" } } },
+  { "mbbill/undotree", keys = { { "<leader>U", "<cmd>UndotreeToggle<CR>", desc = "Toggle undo tree" } } },
   {
     "tpope/vim-dispatch",
     cmd = { "Make", "Dispatch" },
@@ -56,10 +56,9 @@ return {
   { "folke/todo-comments.nvim", event = "BufRead", dependencies = "nvim-lua/plenary.nvim", config = true },
   {
     "rmagatti/alternate-toggler",
-    keys = "<leader>ta",
-    config = function()
-      vim.keymap.set("n", "<leader>ta", "<cmd>ToggleAlternate<cr>")
-    end,
+    keys = {
+      { "<leader>ta", "<cmd>ToggleAlternate<cr>", desc = "Toggle alternate" }
+    },
   },
   -- { "SmiteshP/nvim-navic",      lazy = true }, -- Breadcrumb
 }

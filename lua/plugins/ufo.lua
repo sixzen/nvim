@@ -19,6 +19,18 @@ return {
       end,
     },
   },
+  keys = {
+    { "zR", function() require("ufo").openAllFolds() end, desc = "Open all folds" },
+    { "zM", function() require("ufo").closeAllFolds() end, desc = "Close all folds" },
+    { "zr", function() require("ufo").openFoldsExceptKinds() end, desc = "Open folds except kinds" },
+    { "zm", function() require("ufo").closeFoldsWith() end, desc = "Close folds with" },
+    { "K", function()
+      local winid = require("ufo").peekFoldedLinesUnderCursor()
+      if not winid then
+        vim.api.nvim_command "Lspsaga hover_doc"
+      end
+    end, desc = "Peek fold or hover doc" },
+  },
   config = function()
     local ufo = require "ufo"
 
@@ -63,16 +75,5 @@ return {
 
     local bufnr = vim.api.nvim_get_current_buf()
     ufo.setFoldVirtTextHandler(bufnr, handler)
-
-    vim.keymap.set("n", "zR", ufo.openAllFolds)
-    vim.keymap.set("n", "zM", ufo.closeAllFolds)
-    vim.keymap.set("n", "zr", ufo.openFoldsExceptKinds)
-    vim.keymap.set("n", "zm", ufo.closeFoldsWith)
-    vim.keymap.set("n", "K", function()
-      local winid = ufo.peekFoldedLinesUnderCursor()
-      if not winid then
-        vim.api.nvim_command "Lspsaga hover_doc"
-      end
-    end)
   end,
 }

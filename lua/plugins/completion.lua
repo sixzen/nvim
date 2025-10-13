@@ -292,7 +292,12 @@ return {
       },
 
       sources = {
-        default = { "lazydev", "lsp", "path", "buffer", "dadbod", "snippets", "emoji", "ecolog", "avante" },
+        default = {"lsp", "path", "buffer", "snippets", "emoji", "ecolog", "avante" },
+        per_filetype = {
+          sql = { "dadbod" },
+          -- optionally inherit from the `default` sources
+          lua = { inherit_defaults = true, "lazydev" },
+        },
         providers = {
           dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
           lazydev = {

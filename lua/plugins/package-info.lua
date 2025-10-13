@@ -2,23 +2,16 @@ return {
   "vuki656/package-info.nvim",
   dependencies = { "MunifTanjim/nui.nvim" },
   event = "VeryLazy",
+  keys = {
+    { "<leader>nt", function() require("package-info").toggle() end, desc = "Package info toggle" },
+    { "<leader>nu", function() require("package-info").update() end, desc = "Package info update" },
+    { "<leader>ni", function() require("package-info").install() end, desc = "Package info install" },
+    { "<leader>nd", function() require("package-info").delete() end, desc = "Package info delete" },
+  },
   config = function()
-    local package_info = require "package-info"
-    package_info.setup {
+    require("package-info").setup {
       hide_up_to_date = true, -- It hides up to date versions when displaying virtual text
       package_manager = "pnpm",
     }
-    vim.keymap.set("n", "<leader>nt", function()
-      package_info.toggle()
-    end)
-    vim.keymap.set("n", "<leader>nu", function()
-      package_info.update()
-    end)
-    vim.keymap.set("n", "<leader>ni", function()
-      package_info.install()
-    end)
-    vim.keymap.set("n", "<leader>nd", function()
-      package_info.delete()
-    end)
   end,
 }
