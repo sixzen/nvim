@@ -292,7 +292,7 @@ return {
       },
 
       sources = {
-        default = {"lsp", "path", "buffer", "snippets", "emoji", "ecolog", "avante" },
+        default = { "lsp", "path", "buffer", "snippets", "emoji", "ecolog", "avante" },
         per_filetype = {
           sql = { "dadbod" },
           -- optionally inherit from the `default` sources
@@ -306,9 +306,10 @@ return {
             score_offset = 100,
           },
           lsp = {
-            name = "lsp",
+            name = "LSP",
             enabled = true,
             module = "blink.cmp.sources.lsp",
+            fallbacks = { "buffer" },
           },
           snippets = {
             name = "snippets",
