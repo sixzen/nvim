@@ -1,35 +1,15 @@
 return {
   {
     "zbirenbaum/copilot.lua",
-    event = "BufReadPost",
-    dependencies = {
-      -- "copilotlsp-nvim/copilot-lsp",
-      -- init = function()
-      --   vim.g.copilot_nes_debounce = 500
-      -- end,
-    },
-    init = function()
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "BlinkCmpMenuOpen",
-        callback = function()
-          vim.b.copilot_suggestion_hidden = true
-        end,
-      })
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "BlinkCmpMenuClose",
-        callback = function()
-          vim.b.copilot_suggestion_hidden = false
-        end,
-      })
-    end,
+    event = "VeryLazy",
     opts = {
       panel = {
         enabled = false,
       },
       suggestion = {
         enabled = true,
-        auto_trigger = false,
-        hide_during_completion = true,
+        auto_trigger = true,
+        hide_during_completion = false,
         keymap = {
           accept = "<C-l>",
           accept_word = false,
@@ -39,7 +19,23 @@ return {
           dismiss = "<C-]>",
         },
       },
+      filetypes = {
+        sh = function()
+          if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
+            return false
+          end
+          return true
+        end,
+      },
       should_attach = function(_, bufname)
+        if not vim.bo.buflisted then
+          return false
+        end
+
+        if vim.bo.buftype ~= "" then
+          return false
+        end
+
         if string.match(bufname, "env") then
           return false
         end
