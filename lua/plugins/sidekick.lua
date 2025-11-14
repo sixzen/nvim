@@ -1,14 +1,33 @@
 return {
   "folke/sidekick.nvim",
-  opts = {
-    -- add any options here
-    cli = {
-      mux = {
-        backend = "tmux",
+  event = "VeryLazy",
+  opts = function()
+    Snacks.toggle({
+      name = "Copilot NES",
+      get = function()
+        return require("sidekick.nes").enabled
+      end,
+      set = function(state)
+        require("sidekick.nes").enable(state)
+      end,
+    }):map "<leader>uN"
+
+    return {
+      nes = {
         enabled = true,
+        diff = {
+          inline = "words",
+        },
       },
-    },
-  },
+      -- add any options here
+      cli = {
+        mux = {
+          backend = "tmux",
+          enabled = true,
+        },
+      },
+    }
+  end,
   keys = {
     {
       "<tab>",

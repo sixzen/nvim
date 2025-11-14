@@ -341,15 +341,6 @@ return {
         Snacks.toggle.inlay_hints():map "<leader>uh"
         Snacks.toggle.indent():map "<leader>ug"
         Snacks.toggle.dim():map "<leader>uD"
-        Snacks.toggle({
-          name = "Sidekick NES",
-          get = function()
-            return require("sidekick.nes").enabled
-          end,
-          set = function(state)
-            require("sidekick.nes").enable(state)
-          end,
-        }):map "<leader>uN"
       end,
     })
     vim.api.nvim_create_autocmd("User", {
