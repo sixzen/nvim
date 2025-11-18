@@ -19,6 +19,53 @@ return {
           .. "██████  █████████████████████ ████ █████ █████ ████ ██████ \n"
           .. "\n",
       },
+      sections = {
+        { section = "header" },
+        { section = "keys", gap = 1, padding = 1 },
+        {
+          icon = " ",
+          desc = "Browse Repo",
+          enabled = function()
+            return Snacks.git.get_root() ~= nil
+          end,
+          padding = 1,
+          key = "b",
+          action = function()
+            Snacks.gitbrowse()
+          end,
+        },
+        function()
+          local in_git = Snacks.git.get_root() ~= nil
+          local gh_installed = vim.fn.executable "gh" == 1
+          local cmds = {
+            {
+              icon = " ",
+              title = "Git Status",
+              cmd = "git --no-pager diff --stat -B -M -C",
+              height = 10,
+            },
+          }
+          return vim.tbl_map(function(cmd)
+            return vim.tbl_extend("force", {
+              section = "terminal",
+              enabled = in_git and gh_installed,
+              padding = 1,
+              ttl = 5 * 60,
+              indent = 3,
+            }, cmd)
+          end, cmds)
+        end,
+        {
+          key = "t",
+          enabled = function()
+            return vim.system({ "git", "rev-parse", "--is-bare-repository" }):wait().stdout == "true\n"
+          end,
+          desc = "Worktree",
+          icon = " ",
+          action = "<leader>gt",
+        },
+        { section = "startup" },
+      },
     },
     notifier = {
       enabled = true,
@@ -80,6 +127,7 @@ return {
         col = 0,
       },
     },
+    scope = { enabled = true },
     input = { enabled = true },
     indent = { enabled = true, indent = { char = "▎" }, scope = { char = "▎" } },
     scroll = { enabled = false },
@@ -330,6 +378,7 @@ return {
 
         -- Create some toggle mappings
         Snacks.toggle.option("spell", { name = "Spelling" }):map "<leader>uS"
+        Snacks.toggle.option("hlsearch", { name = "Highlight Search" }):map "<leader>uH"
         Snacks.toggle.option("wrap", { name = "Wrap" }):map "<leader>uw"
         Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map "<leader>uL"
         Snacks.toggle.diagnostics():map "<leader>ud"
@@ -347,6 +396,14 @@ return {
       pattern = "MiniFilesActionRename",
       callback = function(event)
         Snacks.rename.on_rename_file(event.data.from, event.data.to)
+      end,
+    })
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "OilActionsPost",
+      callback = function(event)
+        if event.data.actions[1].type == "move" then
+          Snacks.rename.on_rename_file(event.data.actions[1].src_url, event.data.actions[1].dest_url)
+        end
       end,
     })
   end,

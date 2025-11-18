@@ -13,7 +13,7 @@ return {
         wintypes = "special",
       },
       hide = {
-        cursorline = true,
+        cursorline = "smart",
       },
       window = {
         padding = 0,
