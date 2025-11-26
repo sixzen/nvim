@@ -84,6 +84,11 @@ return {
         --   operators = {},
         -- },
         -- color_overrides = {},
+        lsp_styles = {
+          inlay_hints = {
+            background = false,
+          },
+        },
         custom_highlights = function(colors)
           return {
             StatusLine = { bg = colors.none },
@@ -104,7 +109,7 @@ return {
             CmpNormal = { bg = colors.mantle },
             BlinkCmpMenu = { bg = colors.mantle },
             BlinkCmpMenuSelection = { bg = colors.surface0 },
-            LspInlayHint = { fg = colors.surface1, bg = colors.none },
+            -- LspInlayHint = { fg = colors.overlay0, bg = colors.none },
             InclineNormal = { bg = colors.mantle },
             InclineNormalNC = { bg = colors.mantle },
 
@@ -158,7 +163,10 @@ return {
           -- alpha = true,
           noice = true,
           snacks = true,
-          blink_cmp = false,
+          blink_cmp = true,
+          diffview = true,
+          dap_ui = true,
+          dap = true,
           mini = {
             enabled = true,
           },

@@ -1,6 +1,7 @@
 return {
   "A7Lavinraj/fyler.nvim",
   lazy = false,
+  enabled = false,
   dependencies = { "nvim-mini/mini.icons" },
   opts = {
     hooks = {

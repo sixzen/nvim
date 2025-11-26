@@ -8,7 +8,7 @@ return {
   --   },
   -- }, -- File icons
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     opts = {},
     lazy = true,
     specs = {
@@ -21,6 +21,7 @@ return {
       end
     end,
   },
+  { 'nvim-mini/mini.ai', version = false, opts = {} },
   { "mbbill/undotree", keys = { { "<leader>U", "<cmd>UndotreeToggle<CR>", desc = "Toggle undo tree" } } },
   {
     "tpope/vim-dispatch",

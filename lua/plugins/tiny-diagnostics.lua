@@ -3,7 +3,8 @@ return {
   event = "VeryLazy", -- Or `LspAttach`
   priority = 1000, -- needs to be loaded in first
   config = function()
-    require("tiny-inline-diagnostic").setup({
+    vim.diagnostic.open_float = require("tiny-inline-diagnostic.override").open_float
+    require("tiny-inline-diagnostic").setup {
       options = {
         multilines = {
           enabled = true,
@@ -12,8 +13,8 @@ return {
         show_source = {
           enabled = true,
           if_many = true,
-        }
-      }
-    })
+        },
+      },
+    }
   end,
 }

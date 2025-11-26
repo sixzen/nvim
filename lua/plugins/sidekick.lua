@@ -1,3 +1,4 @@
+local disabled = false
 return {
   "folke/sidekick.nvim",
   event = "VeryLazy",
@@ -11,6 +12,23 @@ return {
         require("sidekick.nes").enable(state)
       end,
     }):map "<leader>uN"
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "SidekickNesHide",
+      callback = function()
+        if disabled then
+          disabled = false
+          require("tiny-inline-diagnostic").enable()
+        end
+      end,
+    })
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "SidekickNesShow",
+      callback = function()
+        disabled = true
+        require("tiny-inline-diagnostic").disable()
+      end,
+    })
 
     return {
       nes = {
