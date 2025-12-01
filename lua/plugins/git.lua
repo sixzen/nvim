@@ -3,7 +3,7 @@ return {
     "sindrets/diffview.nvim",
     event = "VeryLazy",
     keys = {
-      { "<leader><leader>do", "<cmd>DiffviewOpen<cr>",  desc = "Open Diffview" },
+      { "<leader><leader>do", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
       { "<leader><leader>dc", "<cmd>DiffviewClose<cr>", desc = "Open Diffview" },
     },
   },
@@ -57,7 +57,14 @@ return {
         map("n", "<leader>hD", function()
           gitsigns.diffthis "~"
         end, { desc = "Diff this ~" })
+        map("n", "<leader>hQ", function()
+          gitsigns.setqflist "all"
+        end, { desc = "Set qflist (all)" })
+        map("n", "<leader>hq", gitsigns.setqflist, { desc = "Set qflist (buffer)" })
+
+        -- Toggles
         map("n", "<leader>td", gitsigns.toggle_deleted, { desc = "Toggle deleted" })
+        map("n", "<leader>tw", gitsigns.toggle_word_diff, { desc = "Toggle word diff" })
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select git hunk" })
