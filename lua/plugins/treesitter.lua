@@ -76,11 +76,12 @@ return {
         end
       end,
     })
-    -- vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-    --   pattern = { "*.component.html", "*.container.html" },
-    --   callback = function()
-    --     vim.treesitter.start(nil, "angular")
-    --   end,
-    -- })
+    vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+      pattern = { "*.component.html", "*.container.html" },
+      callback = function(args)
+        local buf = args.buf
+        vim.treesitter.start(buf, "angular")
+      end,
+    })
   end,
 }
