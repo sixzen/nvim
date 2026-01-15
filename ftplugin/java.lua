@@ -14,6 +14,71 @@ local workspace_path = home .. "/.local/share/jdtls-workspace/"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = workspace_path .. project_name
 
+-- Detect Java from environment (supports Nix, mise, JAVA_HOME, etc.)
+local function find_java_executable()
+  -- Priority order: JAVA_HOME -> which java -> fallback
+  local java_home = os.getenv "JAVA_HOME"
+  if java_home and java_home ~= "" then
+    local java_bin = java_home .. "/bin/java"
+    if vim.fn.executable(java_bin) == 1 then
+      return java_bin
+    end
+  end
+
+  -- Fallback to system Java
+  if vim.fn.executable "java" == 1 then
+    return "java"
+  end
+
+  -- Last resort
+  return "java"
+end
+
+-- Dynamically build Java runtime paths from environment
+local function detect_java_runtimes()
+  local runtimes = {}
+
+  -- Common Nix store paths (if using Nix)
+  local nix_javas = {
+    { version = "8", pattern = "/nix/store/*-openjdk-8*/lib/openjdk" },
+    { version = "11", pattern = "/nix/store/*-openjdk-11*/lib/openjdk" },
+    { version = "17", pattern = "/nix/store/*-openjdk-17*/lib/openjdk" },
+    { version = "21", pattern = "/nix/store/*-openjdk-21*/lib/openjdk" },
+    { version = "22", pattern = "/nix/store/*-openjdk-22*/lib/openjdk" },
+  }
+
+  for _, java in ipairs(nix_javas) do
+    local matches = vim.fn.glob(java.pattern, false, true)
+    if #matches > 0 then
+      -- Use the most recent (last) match
+      table.insert(runtimes, {
+        name = "JavaSE-" .. java.version,
+        path = matches[#matches],
+      })
+    end
+  end
+
+  -- Also check mise if it exists (for migration period)
+  -- local mise_java_dir = home .. "/.local/share/mise/installs/java/"
+  -- if vim.fn.isdirectory(mise_java_dir) == 1 then
+  --   local mise_versions = vim.fn.readdir(mise_java_dir)
+  --   for _, version in ipairs(mise_versions) do
+  --     if not version:match "^%." and vim.fn.isdirectory(mise_java_dir .. version) == 1 then
+  --       -- Extract major version
+  --       local major = version:match "^(%d+)"
+  --       if major and tonumber(major) then
+  --         table.insert(runtimes, {
+  --           name = "JavaSE-" .. major,
+  --           path = mise_java_dir .. version,
+  --         })
+  --       end
+  --     end
+  --   end
+  -- end
+
+  return runtimes
+end
+
 -- Determine OS
 local os_config = "linux"
 if vim.fn.has "mac" == 1 then
@@ -40,7 +105,7 @@ vim.list_extend(
 
 local config = {
   cmd = {
-    "java",
+    find_java_executable(),
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
     "-Dosgi.bundles.defaultStartLevel=4",
     "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -70,52 +135,7 @@ local config = {
       },
       configuration = {
         updateBuildConfiguration = "interactive",
-        runtimes = {
-          -- {
-          --   name = "JavaSE-11",
-          --   path = "~/.sdkman/candidates/java/11.0.2-open",
-          -- },
-          -- {
-          --   name = "JavaSE-17",
-          --   path = "~/.sdkman/candidates/java/17.0.11-oracle",
-          -- },
-          -- {
-          --   name = "JavaSE-18",
-          --   path = "~/.sdkman/candidates/java/18.0.1.1-open",
-          -- },
-          {
-            name = "JavaSE-19",
-            path = "~/.local/share/mise/installs/java/19.0.2",
-          },
-          {
-            name = "JavaSE-20",
-            path = "~/.local/share/mise/installs/java/20.0.2",
-          },
-          {
-            name = "JavaSE-21",
-            path = "~/.local/share/mise/installs/java/21.0.2",
-          },
-          {
-            name = "JavaSE-22",
-            path = "~/.local/share/mise/installs/java/22.0.2",
-          },
-          -- {
-          --   name = "JavaSE-19",
-          --   path = "~/.sdkman/candidates/java/19-open",
-          -- },
-          -- {
-          --   name = "JavaSE-20",
-          --   path = "~/.sdkman/candidates/java/20-open",
-          -- },
-          -- {
-          --   name = "JavaSE-21",
-          --   path = "~/.sdkman/candidates/java/21.0.2-open",
-          -- },
-          -- {
-          --   name = "JavaSE-22",
-          --   path = "~/.sdkman/candidates/java/22-open",
-          -- },
-        },
+        runtimes = detect_java_runtimes(),
       },
       maven = {
         downloadSources = true,
