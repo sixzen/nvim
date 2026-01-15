@@ -292,7 +292,7 @@ return {
       },
 
       sources = {
-        default = { "lsp", "path", "buffer", "snippets", "emoji", "ecolog", "avante" },
+        default = { "lsp", "path", "buffer", "snippets", "emoji",  "avante" },
         per_filetype = {
           sql = { "dadbod" },
           -- optionally inherit from the `default` sources
@@ -377,7 +377,6 @@ return {
             module = "blink.cmp.sources.buffer",
             min_keyword_length = 3,
           },
-          ecolog = { name = "ecolog", module = "ecolog.integrations.cmp.blink_cmp" },
           cmdline = {
             enabled = function()
               local function not_shellcmd()
