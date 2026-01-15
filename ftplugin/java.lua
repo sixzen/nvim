@@ -25,12 +25,6 @@ local function find_java_executable()
     end
   end
 
-  -- Fallback to system Java
-  if vim.fn.executable "java" == 1 then
-    return "java"
-  end
-
-  -- Last resort
   return "java"
 end
 
