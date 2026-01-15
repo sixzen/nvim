@@ -59,6 +59,7 @@ vim.lsp.enable {
   "tailwindcss",
   "vtsls",
   "yamlls",
+  "nil_ls",
 }
 
 -- local servers = {
