@@ -34,6 +34,27 @@ return {
   },
   opts = {},
   config = function()
+    require("nvim-treesitter").install {
+      "tsx",
+      "lua",
+      "json",
+      "javascript",
+      "typescript",
+      "html",
+      "css",
+      "python",
+      "http",
+      "bash",
+      "vimdoc",
+      "go",
+      "rust",
+      "java",
+      "markdown",
+      "markdown_inline",
+      "regex",
+      "vim",
+    }
+
     ---@param buf integer
     ---@param language string
     local function treesitter_try_attach(buf, language)
