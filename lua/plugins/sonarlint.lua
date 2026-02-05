@@ -3,10 +3,10 @@ return {
   enabled = false,
   event = {
     "BufRead *.java",
-    "BufRead *.js",
-    "BufRead *.ts",
-    "BufRead *.jsx",
-    "BufRead *.tsx",
+    -- "BufRead *.js",
+    -- "BufRead *.ts",
+    -- "BufRead *.jsx",
+    -- "BufRead *.tsx",
   },
   dependencies = {
     "mfussenegger/nvim-jdtls", -- Java stuffs
@@ -37,10 +37,10 @@ return {
         -- "cpp",
         -- Requires nvim-jdtls, otherwise an error message will be printed
         "java",
-        "javascript",
-        "typescript",
-        "javascriptreact",
-        "typescriptreact",
+        -- "javascript",
+        -- "typescript",
+        -- "javascriptreact",
+        -- "typescriptreact",
       },
     }
   end,

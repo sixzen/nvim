@@ -378,17 +378,20 @@ return {
             min_keyword_length = 3,
           },
           cmdline = {
-            enabled = function()
-              local function not_shellcmd()
-                if vim.fn.getcmdtype() ~= ":" then
-                  return true
-                else
-                  return not vim.fn.getcmdline():match "^[%%0-9,'<>%-]*!"
-                end
-              end
-              return not_shellcmd()
-            end,
+            enabled = true,
           },
+          -- cmdline = {
+          --   enabled = function()
+          --     local function not_shellcmd()
+          --       if vim.fn.getcmdtype() ~= ":" then
+          --         return true
+          --       else
+          --         return not vim.fn.getcmdline():match "^[%%0-9,'<>%-]*!"
+          --       end
+          --     end
+          --     return not_shellcmd()
+          --   end,
+          -- },
         },
         -- cmdline = function()
         --   local type = vim.fn.getcmdtype()
