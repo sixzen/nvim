@@ -51,7 +51,7 @@ vim.lsp.enable {
   "jsonls",
   "lemminx",
   "lua_ls",
-  "marksman",
+  -- "marksman",
   "pyright",
   "r_language_server",
   "ruff",
@@ -60,6 +60,7 @@ vim.lsp.enable {
   "vtsls",
   "yamlls",
   "nil_ls",
+  "markdown_oxide",
 }
 
 -- local servers = {
