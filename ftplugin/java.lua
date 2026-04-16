@@ -161,7 +161,7 @@ local config = {
 }
 
 config["on_attach"] = function(client, bufnr)
-  local _, _ = pcall(vim.lsp.codelens.refresh)
+  local _, _ = pcall(vim.lsp.codelens.enable, true, { bufnr = bufnr })
   require("jdtls").setup_dap { hotcodereplace = "auto" }
   -- require("sixzen.lsp").on_attach(client, bufnr)
   local status_ok, jdtls_dap = pcall(require, "jdtls.dap")
@@ -173,7 +173,7 @@ end
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   pattern = { "*.java" },
   callback = function()
-    local _, _ = pcall(vim.lsp.codelens.refresh)
+    local _, _ = pcall(vim.lsp.codelens.enable, true)
   end,
 })
 
