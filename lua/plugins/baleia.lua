@@ -1,7 +1,8 @@
 return {
   "m00qek/baleia.nvim",
+  event = { "BufReadPre", "BufNewFile" },
   config = function()
-    local baleia = require("baleia").setup({})
+    local baleia = require("baleia").setup {}
 
     -- Command to manually apply ANSI rendering in any buffer
     vim.api.nvim_create_user_command("BaleiaColorize", function()
