@@ -256,21 +256,21 @@ return {
       end,
       desc = "Buffers",
     },
-    {
-      "<leader>;l",
-      function()
-        Snacks.picker.grep()
-      end,
-      desc = "Grep",
-    },
-    {
-      "<leader>;w",
-      function()
-        Snacks.picker.grep_word()
-      end,
-      desc = "Grep Word or Selection",
-      mode = { "n", "x" },
-    },
+    -- {
+    --   "<leader>;l",
+    --   function()
+    --     Snacks.picker.grep()
+    --   end,
+    --   desc = "Grep",
+    -- },
+    -- {
+    --   "<leader>;w",
+    --   function()
+    --     Snacks.picker.grep_word()
+    --   end,
+    --   desc = "Grep Word or Selection",
+    --   mode = { "n", "x" },
+    -- },
     {
       "<leader>;:",
       function()
@@ -278,13 +278,13 @@ return {
       end,
       desc = "Command History",
     },
-    {
-      "<leader>;f",
-      function()
-        Snacks.picker.smart()
-      end,
-      desc = "Smart picker",
-    },
+    -- {
+    --   "<leader>;f",
+    --   function()
+    --     Snacks.picker.smart()
+    --   end,
+    --   desc = "Smart picker",
+    -- },
     {
       "<leader>;r",
       function()
