@@ -45,3 +45,11 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 
 vim.keymap.set("t", "<C-q>", "<C-\\><C-n>", { noremap = true, silent = true })
+
+if vim.g.neovide then
+  local function paste_from_clipboard()
+    vim.api.nvim_paste(vim.fn.getreg "+", true, -1)
+  end
+
+  vim.keymap.set({ "n", "i", "v", "c", "t" }, "<C-S-v>", paste_from_clipboard, { silent = true, desc = "Paste from system clipboard" })
+end
