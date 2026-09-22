@@ -2,6 +2,7 @@ return {
   {
     "zbirenbaum/copilot.lua",
     event = "VeryLazy",
+    enabled = false,
     opts = {
       panel = {
         enabled = false,
