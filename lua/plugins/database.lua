@@ -1,5 +1,28 @@
 return {
   {
+    "joryeugene/dadbod-grip.nvim",
+    opts = { ai = false },
+    keys = {
+      { "<leader><leader>dg", "<cmd>GripConnect<cr>", desc = "Database: Grip connections" },
+      { "<leader><leader>ds", "<cmd>GripStart<cr>", desc = "Database: Grip start" },
+    },
+  },
+  {
+    "2giosangmitom/sqmeow.nvim",
+    version = "*", -- Keep the Lua client and released engine in agreement.
+    dependencies = { "MunifTanjim/nui.nvim" },
+    build = function()
+      -- Explicit download method: never silently fall back to a Cargo build.
+      local ok, err = require("sqmeow").install { method = "curl" }
+      assert(ok, err)
+    end,
+    opts = {}, -- Preserve confirmation and connection-URL redaction defaults.
+    cmd = "Sqmeow",
+    keys = {
+      { "<leader><leader>dm", "<cmd>Sqmeow<cr>", desc = "Database: Sqmeow" },
+    },
+  },
+  {
     "kristijanhusak/vim-dadbod-ui",
     dependencies = {
       "tpope/vim-dadbod",
