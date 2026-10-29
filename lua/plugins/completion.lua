@@ -392,7 +392,8 @@ return {
             name = "LSP",
             enabled = true,
             module = "blink.cmp.sources.lsp",
-            fallbacks = { "buffer" },
+            score_offset = 90,
+            fallbacks = { "ripgrep", "buffer" },
           },
           snippets = {
             name = "snippets",
