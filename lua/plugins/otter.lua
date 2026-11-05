@@ -6,7 +6,6 @@ return {
     {
       "neovim/nvim-lspconfig",
       "nvim-treesitter/nvim-treesitter",
-      "hrsh7th/nvim-cmp",
     },
   },
   config = function()

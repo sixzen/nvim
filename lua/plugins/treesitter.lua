@@ -1,17 +1,8 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  -- event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   lazy = false,
   dependencies = {
-    -- "numToStr/Comment.nvim",
-    -- "nvim-treesitter/nvim-treesitter-textobjects",
-    -- {
-    --   "windwp/nvim-autopairs",
-    --   opts = {
-    --     disable_filetype = { "TelescopePrompt", "vim" },
-    --   },
-    -- },
     {
       "nvim-treesitter/nvim-treesitter-context",
       config = function()
