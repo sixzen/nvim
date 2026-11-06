@@ -21,24 +21,28 @@ local StatusIcon = {
   end,
 }
 
+-- Oil directory paths longer than this are shown as "…" + their tail.
+local MAX_DIR_LENGTH = 20
+local TRUNCATE_TO = 17
+
 local TablineFileName = {
   provider = function(self)
     local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-    local name = vim.fn.fnamemodify(self.filename, ":t")
     if self.filename == "" then
       return "[No Name]"
     end
-    if name == nil then
+    -- oil buffers are directories ("oil:///path/"), whose basename is empty
+    if vim.startswith(self.filename, "oil://") then
+      local dir = vim.fn.fnamemodify(self.filename:gsub("^oil://", ""), ":~")
+      if vim.fn.strchars(dir) > MAX_DIR_LENGTH then
+        dir = "…" .. vim.fn.strcharpart(dir, vim.fn.strchars(dir) - TRUNCATE_TO)
+      end
+      return project_name .. ":" .. dir
+    end
+    local name = vim.fn.fnamemodify(self.filename, ":t")
+    -- fnamemodify returns "" (never nil) for names ending in "/"
+    if name == "" then
       name = "[No Name]"
-    end
-    if string.find(name, "filesystem") ~= nil then
-      return "[File Explorer]"
-    end
-    if string.find(name, "Neogit") ~= nil then
-      return "[NeoGit]"
-    end
-    if string.find(name, "COMMIT") ~= nil then
-      return "[NeoGit Commit]"
     end
     if string.find(name, "dbui") ~= nil then
       return "DBUI"

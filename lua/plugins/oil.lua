@@ -8,11 +8,36 @@ return {
       "<CMD>Oil<CR>",
       desc = "Start oil",
     },
+    {
+      "<leader>e",
+      function()
+        require("oil").open_float(nil, { preview = {} })
+      end,
+      desc = "Oil float (directory of current file)",
+    },
+    {
+      "<leader>E",
+      function()
+        require("oil").open_float(vim.uv.cwd(), { preview = {} })
+      end,
+      desc = "Oil float (cwd)",
+    },
   },
   opts = {
     default_file_explorer = true,
     columns = {
-      "icon"
+      "icon",
+      { "size", highlight = "String" },
+    },
+    keymaps = {
+      ["q"] = { "actions.close", mode = "n" },
+    },
+    float = {
+      border = "solid",
+      max_width = 150,
+      win_options = {
+        winblend = 10,
+      },
     },
     buf_options = {
       buflisted = false,
@@ -25,7 +50,7 @@ return {
     lsp_file_methods = {
       enabled = true,
       timeout_ms = 1000,
-      autosave_changes = false,
+      autosave_changes = true,
     },
     constrain_cursor = "editable",
     watch_for_changes = false,

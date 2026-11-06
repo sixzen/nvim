@@ -138,10 +138,6 @@ return {
             SnacksIndent = { fg = "#3c3d49" },
             SnacksIndentScope = { fg = "#5e5f69" },
             SnacksNormal = { bg = colors.mantle },
-
-            MiniFilesTitle = { bg = colors.mantle },
-            MiniFilesTitleFocused = { bg = colors.mantle },
-            MiniFilesBorderModified = { fg = colors.peach, bg = colors.mantle },
           }
         end,
         integrations = {
