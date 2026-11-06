@@ -132,6 +132,15 @@ return {
     input = { enabled = true },
     indent = { enabled = true, indent = { char = "▎" }, scope = { char = "▎" } },
     scroll = { enabled = false },
+    lazygit = {
+      config = {
+        -- Edit files in the window lazygit was launched from (see config/lazygit.lua)
+        os = {
+          edit = require("config.lazygit").edit_command(),
+          editAtLine = require("config.lazygit").edit_command { at_line = true },
+        },
+      },
+    },
   },
   keys = {
     {
@@ -200,21 +209,21 @@ return {
     {
       "<leader>gf",
       function()
-        Snacks.lazygit.log_file()
+        require("config.lazygit").open(Snacks.lazygit.log_file)
       end,
       desc = "Lazygit Current File History",
     },
     {
       "<leader>gg",
       function()
-        Snacks.lazygit()
+        require("config.lazygit").open()
       end,
       desc = "Lazygit",
     },
     {
       "<leader>gl",
       function()
-        Snacks.lazygit.log()
+        require("config.lazygit").open(Snacks.lazygit.log)
       end,
       desc = "Lazygit Log (cwd)",
     },
