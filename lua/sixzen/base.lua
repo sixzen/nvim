@@ -64,6 +64,14 @@ vim.opt.wildignore:append { "*/node_modules/*" }
 vim.opt.spelllang:append "cjk" -- disable spellchecking for asian characters (VIM algorithm does not support it)
 vim.opt.whichwrap:append "<,>,[,],h,l"
 vim.opt.list = true
+
+-- Folding with treesitter, all folds open by default
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+-- foldlevel is window-local; this also opens folds for buffers entering windows
+-- that set a lower level (e.g. CodeDiff compact mode)
+vim.opt.foldlevelstart = 99
 vim.opt.listchars = "tab: ,trail:•"
 
 vim.g.snippets = "luasnip"
