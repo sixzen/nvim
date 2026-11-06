@@ -10,5 +10,7 @@ return {
       end,
     },
   },
-  opts = {},
+  opts = {
+    view = { overlay_style = "hunk" },
+  },
 }

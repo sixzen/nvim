@@ -52,6 +52,41 @@ return {
         map("n", "<leader>hb", function()
           gitsigns.blame_line { full = true }
         end, { desc = "Blame line" })
+        -- Open the file as it was in the commit that last touched the current line.
+        -- Uses `git blame --porcelain` (follows renames) and the public show() API.
+        map("n", "<leader>hO", function()
+          local file = vim.api.nvim_buf_get_name(0)
+          local lnum = vim.api.nvim_win_get_cursor(0)[1]
+          local cmd = { "git", "blame", "--porcelain", "-L", lnum .. "," .. lnum, "--", file }
+          vim.system(
+            cmd,
+            { cwd = vim.fs.dirname(file), text = true },
+            vim.schedule_wrap(function(res)
+              if res.code ~= 0 then
+                vim.notify(vim.trim(res.stderr), vim.log.levels.ERROR)
+                return
+              end
+              local sha, orig_lnum = res.stdout:match "^(%x+) (%d+)"
+              local path = res.stdout:match "\nfilename ([^\n]+)"
+              if not sha or not path then
+                return
+              end
+              if sha:match "^0+$" then
+                vim.notify("Line not committed yet", vim.log.levels.WARN)
+                return
+              end
+              gitsigns.show(sha .. ":" .. path, { open = "tabedit" }, function(err)
+                vim.schedule(function()
+                  if err then
+                    vim.notify(err, vim.log.levels.ERROR)
+                    return
+                  end
+                  pcall(vim.api.nvim_win_set_cursor, 0, { tonumber(orig_lnum), 0 })
+                end)
+              end)
+            end)
+          )
+        end, { desc = "Open file at line's last commit" })
         map("n", "<leader>hB", gitsigns.toggle_current_line_blame, { desc = "Toggle line blame" })
         map("n", "<leader>hd", gitsigns.diffthis, { desc = "Diff this" })
         map("n", "<leader>hD", function()

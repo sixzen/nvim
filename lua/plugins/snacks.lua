@@ -246,9 +246,29 @@ return {
     {
       "<leader>;b",
       function()
-        Snacks.picker.buffers()
+        Snacks.picker.buffers {
+          confirm = function(picker, item)
+            picker:close()
+            if not item then
+              return
+            end
+            -- Jump to the window already showing the buffer (any tab), else open it here
+            vim.schedule(function()
+              for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
+                for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
+                  if vim.api.nvim_win_get_buf(win) == item.buf then
+                    vim.api.nvim_set_current_tabpage(tab)
+                    vim.api.nvim_set_current_win(win)
+                    return
+                  end
+                end
+              end
+              vim.api.nvim_set_current_buf(item.buf)
+            end)
+          end,
+        }
       end,
-      desc = "Buffers",
+      desc = "Buffers (jump to existing window)",
     },
     {
       "<leader>;l",
