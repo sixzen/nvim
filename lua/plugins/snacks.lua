@@ -73,25 +73,10 @@ return {
     },
     picker = {
       enabled = true,
-      actions = {
-        sidekick_send = function(...)
-          return require("sidekick.cli.picker.snacks").send(...)
-        end,
-      },
       layout = {
         preset = function()
           return vim.o.columns >= 120 and "ivy" or "vertical"
         end,
-      },
-      win = {
-        input = {
-          keys = {
-            ["<a-a>"] = {
-              "sidekick_send",
-              mode = { "n", "i" },
-            },
-          },
-        },
       },
       layouts = {
         ivy = {

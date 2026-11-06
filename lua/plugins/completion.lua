@@ -73,7 +73,6 @@ return {
     dependencies = {
       "L3MON4D3/LuaSnip",
       "moyiz/blink-emoji.nvim",
-      "Kaiser-Yang/blink-cmp-avante",
       {
         "mikavilpas/blink-ripgrep.nvim",
         version = "*", -- use the latest stable version
@@ -105,7 +104,7 @@ return {
       },
 
       sources = {
-        default = { "lsp", "path", "buffer", "ripgrep", "snippets", "emoji", "avante" },
+        default = { "lsp", "path", "buffer", "ripgrep", "snippets", "emoji" },
         per_filetype = {
           sql = { "dadbod" },
           -- optionally inherit from the `default` sources
@@ -173,10 +172,6 @@ return {
             module = "blink-emoji",
             name = "Emoji",
             opts = { insert = true }, -- Insert emoji (default) or complete its name
-          },
-          avante = {
-            module = "blink-cmp-avante",
-            name = "Avante",
           },
           path = {
             name = "Path",
