@@ -53,3 +53,18 @@ if vim.g.neovide then
 
   vim.keymap.set({ "n", "i", "v", "c", "t" }, "<C-S-v>", paste_from_clipboard, { silent = true, desc = "Paste from system clipboard" })
 end
+
+
+-- Copy file paths / selection for pasting into agents
+vim.keymap.set("n", "<leader>yf", function()
+  require("config.editor").yank_relative_path()
+end, { desc = "Yank relative path with line" })
+vim.keymap.set("n", "<leader>yp", function()
+  require("config.editor").yank_absolute_path()
+end, { desc = "Yank absolute path with line" })
+vim.keymap.set(
+  "x",
+  "<leader>yc",
+  ":<C-u>lua require('config.editor').copy_as_codeblock()<CR>",
+  { silent = true, desc = "Yank selection as code block" }
+)
