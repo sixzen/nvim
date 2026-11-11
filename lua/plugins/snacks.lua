@@ -2,6 +2,10 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  config = function(_, opts)
+    require("config.snacks-image").install()
+    require("snacks").setup(opts)
+  end,
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
