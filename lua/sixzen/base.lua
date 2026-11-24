@@ -72,6 +72,7 @@ vim.opt.foldlevel = 99
 -- foldlevel is window-local; this also opens folds for buffers entering windows
 -- that set a lower level (e.g. CodeDiff compact mode)
 vim.opt.foldlevelstart = 99
+vim.opt.fillchars:append { eob = " " } -- hide ~ after end of buffer
 vim.opt.listchars = "tab: ,trail:•"
 
 vim.g.snippets = "luasnip"
